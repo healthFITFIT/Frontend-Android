@@ -1,1 +1,1 @@
-# FITFIT Frontend Android
+# FITFIT Frontend Android app
