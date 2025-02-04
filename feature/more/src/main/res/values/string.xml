@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--about ===================================================================================-->
+    <string name="about">About</string>
+
+
+    <!--account =================================================================================-->
+    <string name="account">Account</string>
+
+
+    <!--deleteAccount ===========================================================================-->
+    <string name="delete_account">Delete account</string>
+
+
+    <!--editProfile =============================================================================-->
+    <string name="edit_profile">Edit profile</string>
+
+
+    <!--mainMore ================================================================================-->
+    <string name="more">More</string>
+    <string name="settings">Settings</string>
+
+
+    <!--setDateTimeFormat =======================================================================-->
+    <string name="date_time_format">Date time format</string>
+
+
+    <!--setTheme ================================================================================-->
+    <string name="theme">Theme</string>
+
+</resources>

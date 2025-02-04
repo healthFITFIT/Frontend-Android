@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--DateTime.kt-->
+    <string name="ymd">Y M D</string>
+    <string name="dmy">D M Y</string>
+    <string name="mdy">M D Y</string>
+    <string name="_24h">24h</string>
+    <string name="_12h">12h</string>
+
+    <!--Theme.kt-->
+    <string name="theme_light">Light theme</string>
+    <string name="theme_dark">Dark theme</string>
+    <string name="theme_auto">Same as device theme</string>
+
+</resources>
