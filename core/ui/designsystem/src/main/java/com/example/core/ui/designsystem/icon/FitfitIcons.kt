@@ -7,12 +7,9 @@ import androidx.compose.material.icons.automirrored.rounded.List
 import androidx.compose.material.icons.automirrored.rounded.Login
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.automirrored.rounded.Send
-import androidx.compose.material.icons.outlined.FitnessCenter
 import androidx.compose.material.icons.outlined.Keyboard
-import androidx.compose.material.icons.outlined.Luggage
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material.icons.outlined.Palette
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.rounded.AccessTime
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Bolt
@@ -30,16 +27,13 @@ import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
-import androidx.compose.material.icons.rounded.FileDownload
 import androidx.compose.material.icons.rounded.FitnessCenter
 import androidx.compose.material.icons.rounded.FlashOff
 import androidx.compose.material.icons.rounded.FlashOn
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
-import androidx.compose.material.icons.rounded.List
 import androidx.compose.material.icons.rounded.LocationOff
-import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Logout
 import androidx.compose.material.icons.rounded.Luggage
 import androidx.compose.material.icons.rounded.ManageAccounts
@@ -48,9 +42,9 @@ import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.MoreTime
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.OpenInNew
+import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.material.icons.rounded.People
-import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.PersonAdd
 import androidx.compose.material.icons.rounded.QrCode
 import androidx.compose.material.icons.rounded.QrCodeScanner
@@ -102,15 +96,16 @@ object IconTextButtonIcon {
     val rightArrow = MyIcon(Icons.Rounded.KeyboardArrowRight, 30.dp, false, null, R.string.example)
 }
 
+object IconButtonIcon {
+    val stop = MyIcon(Icons.Rounded.Close,     34.dp, false, null, R.string.stop)
+    val pause = MyIcon(Icons.Rounded.Pause,    30.dp, false, null, R.string.pause)
+}
+
 object FabIcon {
     val add = MyIcon(Icons.Rounded.Add, 24.dp, false, null, R.string.example)
     val map = MyIcon(Icons.Rounded.Map, 22.dp, false, null, R.string.example)
 }
 
-object MapButtonIcon {
-    val focusOnToTarget = MyIcon(Icons.Rounded.LocationOn,          24.dp, false, null, R.string.example)
-    val disabledFocusOnToTarget = MyIcon(Icons.Rounded.LocationOn,  24.dp, true, null, R.string.example)
-}
 
 
 
