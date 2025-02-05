@@ -17,6 +17,6 @@ fun StartWorkoutButton(
         modifier = Modifier.widthIn(min = 220.dp).height(50.dp),
         text = stringResource(id = R.string.start_workout),
         onClick = onClick,
-        textStyle = MaterialTheme.typography.titleMedium
+        textStyle = MaterialTheme.typography.titleSmall
     )
 }
