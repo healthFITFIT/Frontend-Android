@@ -8,11 +8,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RippleConfiguration
@@ -29,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.example.core.ui.designsystem.components.utils.ClickableBox
 import com.example.core.ui.designsystem.components.utils.MySpacerColumn
 import com.example.core.ui.designsystem.components.utils.MySpacerRow
 import com.example.core.ui.designsystem.icon.DisplayIcon
@@ -120,19 +120,18 @@ internal fun MyIconButton(
 
     enabled: Boolean = true,
     containerColor: Color = MaterialTheme.colorScheme.primary,
-    textStyle: TextStyle = MaterialTheme.typography.labelLarge
 ){
-    IconButton(
-        colors = IconButtonDefaults.iconButtonColors(
-            containerColor = containerColor,
-            contentColor = MaterialTheme.colorScheme.contentColorFor(containerColor)
-        ),
+    ClickableBox(
+        modifier = modifier,
         enabled = enabled,
         onClick = onClick,
-        modifier = modifier
+        containerColor = containerColor,
+        shape = CircleShape,
+        contentAlignment = Alignment.Center
     ) {
         DisplayIcon(
-            icon = icon
+            icon = icon,
+            color = MaterialTheme.colorScheme.contentColorFor(containerColor)
         )
     }
 }
