@@ -6,14 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RippleConfiguration
@@ -25,168 +24,25 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.example.core.ui.designsystem.R
 import com.example.core.ui.designsystem.components.utils.MySpacerColumn
 import com.example.core.ui.designsystem.components.utils.MySpacerRow
 import com.example.core.ui.designsystem.icon.DisplayIcon
 import com.example.core.ui.designsystem.icon.IconTextButtonIcon
 import com.example.core.ui.designsystem.icon.MyIcon
-import com.example.core.ui.designsystem.icon.MyIcons
 import com.example.core.ui.designsystem.theme.FitfitTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PrivacyPolicyButton(
-    onClick: () -> Unit,
-){
-    val grayRippleConfiguration = RippleConfiguration(
-        color = MaterialTheme.colorScheme.onSurfaceVariant
-    )
-
-    CompositionLocalProvider(LocalRippleConfiguration provides grayRippleConfiguration) {
-        TextButton(
-            onClick = onClick
-        ) {
-            Text(
-                text = stringResource(id = R.string.privacy_policy),
-                style = MaterialTheme.typography.labelMedium.copy(
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textDecoration = TextDecoration.Underline
-                )
-            )
-        }
-    }
-}
-
-@Composable
-fun StartWorkoutButton(
-    onClick: () -> Unit
-){
-    MyTextButton(
-        modifier = Modifier.widthIn(min = 220.dp),
-        text = stringResource(id = R.string.start_workout),
-        onClick = onClick,
-        textStyle = MaterialTheme.typography.titleMedium
-    )
-}
-
-@Composable
-fun TryAgainButton(
-    onClick: () -> Unit,
-    enabled: Boolean
-){
-    MyTextButton(
-        text = stringResource(id = R.string.try_again),
-        onClick = onClick,
-        enabled = enabled
-    )
-}
-
-
-@Composable
-fun DeleteAccountButton(
-    enabled: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-){
-    MyTextButton(
-        text = stringResource(id = R.string.delete_account),
-        enabled = enabled,
-        onClick = onClick,
-        modifier = modifier.width(180.dp),
-        containerColor =  MaterialTheme.colorScheme.error,
-        textStyle = if (enabled) MaterialTheme.typography.labelLarge.copy(color = MaterialTheme.colorScheme.onError)
-                    else MaterialTheme.typography.labelLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
-    )
-}
-
-//@Composable
-//fun NewItemButton(
-//    text: String,
-//    onClick: () -> Unit,
-//    modifier: Modifier = Modifier
-//){
-//    IconTextButton(
-//        icon = IconTextButtonIcon.add,
-//        text = text,
-//        onClick = onClick,
-//        modifier = modifier
-//    )
-//}
-//
-//@Composable
-//fun DeleteItemButton(
-//    visible: Boolean,
-//    text: String,
-//    onClick: () -> Unit
-//){
-//    Box(modifier = Modifier.height(40.dp)){
-//        AnimatedVisibility(
-//            visible = visible,
-//            enter = fadeIn(tween(400)) + scaleIn(tween(300)),
-//            exit = fadeOut(tween(300)) + scaleOut(tween(400))
-//        ) {
-//            IconTextButton(
-//                icon = IconTextButtonIcon.delete,
-//                text = text,
-//                onClick = onClick,
-//                containerColor = MaterialTheme.colorScheme.error,
-//                textStyle = MaterialTheme.typography.labelLarge.copy(color = MaterialTheme.colorScheme.onError)
-//            )
-//        }
-//    }
-//
-//}
-
-@Composable
-fun ChangeProfileImageButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-){
-    IconTextButtonColumn(
-        icon = MyIcons.changeProfileImage,
-        text = stringResource(id = R.string.change_image),
-        onClick = onClick,
-        containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface,
-        modifier = modifier
-    )
-}
-
-@Composable
-fun DeleteProfileImageButton(
-    onClick: () -> Unit,
-    enabled: Boolean,
-    modifier: Modifier = Modifier
-){
-    IconTextButtonColumn(
-        icon = MyIcons.deleteProfileImage,
-        text = stringResource(id = R.string.delete_image),
-        onClick = onClick,
-        enabled = enabled,
-        containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface,
-        modifier = modifier
-    )
-}
-
-
-
-
-
-@Composable
-private fun MyTextButton(
+internal fun MyTextButton(
     text: String,
     onClick: () -> Unit,
 
     modifier: Modifier = Modifier,
+
     enabled: Boolean = true,
     containerColor: Color = MaterialTheme.colorScheme.primary,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge
@@ -227,6 +83,7 @@ internal fun MyTextRippleButton(
     onClick: () -> Unit,
 
     modifier: Modifier = Modifier,
+
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     textColor: Color = MaterialTheme.colorScheme.primary,
     enabled: Boolean = true
@@ -255,11 +112,39 @@ internal fun MyTextRippleButton(
 }
 
 @Composable
-private fun IconTextButton(
+internal fun MyIconButton(
+    icon: MyIcon,
+    onClick: () -> Unit,
+
+    modifier: Modifier = Modifier,
+
+    enabled: Boolean = true,
+    containerColor: Color = MaterialTheme.colorScheme.primary,
+    textStyle: TextStyle = MaterialTheme.typography.labelLarge
+){
+    IconButton(
+        colors = IconButtonDefaults.iconButtonColors(
+            containerColor = containerColor,
+            contentColor = MaterialTheme.colorScheme.contentColorFor(containerColor)
+        ),
+        enabled = enabled,
+        onClick = onClick,
+        modifier = modifier
+    ) {
+        DisplayIcon(
+            icon = icon
+        )
+    }
+}
+
+@Composable
+internal fun MyIconTextButton(
     icon: MyIcon,
     text: String,
     onClick: () -> Unit,
+
     modifier: Modifier = Modifier,
+
     enabled: Boolean = true,
     containerColor: Color = MaterialTheme.colorScheme.primary,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge
@@ -294,7 +179,7 @@ private fun IconTextButton(
 }
 
 @Composable
-private fun IconTextButtonColumn(
+internal fun MyIconTextButtonColumn(
     icon: MyIcon,
     text: String,
     onClick: () -> Unit,
@@ -327,7 +212,7 @@ private fun IconTextButtonColumn(
             Text(
                 text = text,
                 style = if (enabled) textStyle
-                        else textStyle.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
+                else textStyle.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.SemiBold
             )
@@ -349,111 +234,9 @@ private fun IconTextButtonColumn(
 
 
 
-
-
-
-
-
-
-
 @Composable
 @PreviewLightDark
-private fun PrivacyPolicyPreview(){
-    FitfitTheme {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .padding(16.dp)
-                .width(190.dp)
-        ){
-            PrivacyPolicyButton(
-                onClick = {},
-            )
-        }
-    }
-}
-
-@Composable
-@PreviewLightDark
-private fun DeleteAccountButtonPreview(){
-    FitfitTheme {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .padding(16.dp)
-                .width(190.dp)
-        ) {
-            DeleteAccountButton(
-                enabled = true,
-                onClick = {}
-            )
-        }
-    }
-}
-
-@Composable
-@PreviewLightDark
-private fun DeleteAccountButtonDisabledPreview(){
-    FitfitTheme {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .padding(16.dp)
-                .width(190.dp)
-        ) {
-            DeleteAccountButton(
-                enabled = false,
-                onClick = {}
-            )
-        }
-    }
-}
-
-//@Composable
-//@PreviewLightDark
-//private fun NewItemButtonPreview(){
-//    FitfitTheme {
-//        Box(
-//            contentAlignment = Alignment.Center,
-//            modifier = Modifier
-//                .background(MaterialTheme.colorScheme.surface)
-//                .padding(16.dp)
-//                .width(190.dp)
-//        ) {
-//            NewItemButton(
-//                text = "New item",
-//                onClick = {}
-//            )
-//        }
-//    }
-//}
-//
-//@Composable
-//@PreviewLightDark
-//private fun DeleteItemButtonPreview(){
-//    FitfitTheme {
-//        Box(
-//            contentAlignment = Alignment.Center,
-//            modifier = Modifier
-//                .background(MaterialTheme.colorScheme.surface)
-//                .padding(16.dp)
-//                .width(190.dp)
-//        ) {
-//            DeleteItemButton(
-//                visible = true,
-//                text = "Delete item",
-//                onClick = {}
-//            )
-//        }
-//    }
-//}
-
-@Composable
-@PreviewLightDark
-private fun MyTextButtonPreview(){
+private fun Preview_MyTextButton(){
     FitfitTheme {
         Box(
             contentAlignment = Alignment.Center,
@@ -472,7 +255,7 @@ private fun MyTextButtonPreview(){
 
 @Composable
 @PreviewLightDark
-private fun MyTextButtonDisabledPreview(){
+private fun Preview_MyTextButtonDisabled(){
     FitfitTheme {
         Box(
             contentAlignment = Alignment.Center,
@@ -492,7 +275,7 @@ private fun MyTextButtonDisabledPreview(){
 
 @Composable
 @PreviewLightDark
-private fun MyTextButtonTransparentPreview(){
+private fun Preview_MyTextButtonTransparent(){
     FitfitTheme {
         Box(
             contentAlignment = Alignment.Center,
@@ -512,7 +295,7 @@ private fun MyTextButtonTransparentPreview(){
 
 @Composable
 @PreviewLightDark
-private fun MyTextButtonTransparentDisabledPreview(){
+private fun Preview_MyTextButtonTransparentDisabled(){
     FitfitTheme {
         Box(
             contentAlignment = Alignment.Center,
@@ -533,7 +316,7 @@ private fun MyTextButtonTransparentDisabledPreview(){
 
 @Composable
 @PreviewLightDark
-private fun IconTextButtonPreview(){
+private fun Preview_MyIconTextButton(){
     FitfitTheme {
         Box(
             contentAlignment = Alignment.Center,
@@ -542,7 +325,7 @@ private fun IconTextButtonPreview(){
                 .padding(16.dp)
                 .width(190.dp)
         ) {
-            IconTextButton(
+            MyIconTextButton(
                 icon = IconTextButtonIcon.add,
                 text = "Icon text button",
                 onClick = {}

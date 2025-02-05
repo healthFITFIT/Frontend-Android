@@ -3,6 +3,11 @@
     <string name="example">example</string>
 
     <!--component/button/ =======================================================================-->
+    <!-- AccountButtons.kt -->
+    <string name="delete_account">계정 삭제</string>
+    <string name="change_image">사진 변경</string>
+    <string name="delete_image">사진 삭제</string>
+
     <!-- AuthButtons.kt -->
     <string name="sign_in_with_google">Google로 로그인</string>
     <string name="sign_in_with_apple">Apple로 로그인</string>
@@ -15,12 +20,18 @@
     <string name="save">저장</string>
     <string name="cancel">취소</string>
 
-    <!-- buttons.kt -->
-    <string name="privacy_policy">개인정보 처리방침</string>
+    <!-- MainWorkoutButtons.kt -->
     <string name="start_workout">운동 시작</string>
+
+    <!-- PrivacyPolicyButton.kt -->
+    <string name="privacy_policy">개인정보 처리방침</string>
+
+    <!-- TryAgainButton.kt -->
     <string name="try_again">다시 시도</string>
-    <string name="delete_account">계정 삭제</string>
-    <string name="change_image">사진 변경</string>
+
+    <!-- WorkoutButtons.kt -->
+    <string name="next_workout">다음 운동</string>
+
 
     <!--component/topAppBars/ ===================================================================-->
     <!-- FitfitTopAppBar.kt -->
@@ -41,10 +52,12 @@
 
     <!--IconTextButtonIcon-->
 
+    <!--IconTextButtonIcon-->
+    <string name="stop">정지</string>
+    <string name="pause">일시정지</string>
 
     <!--MyIcons-->
     <string name="error">오류</string>
-    <string name="delete_image">사진 삭제</string>
 
 
 </resources>
