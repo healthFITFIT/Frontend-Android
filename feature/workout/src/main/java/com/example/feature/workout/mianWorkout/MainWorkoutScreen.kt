@@ -1,7 +1,6 @@
 package com.example.feature.workout.mianWorkout
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.example.core.ui.designsystem.components.MyScaffold
 import com.example.core.ui.designsystem.components.button.StartWorkoutButton
 import com.example.core.ui.designsystem.components.topAppBar.FitfitTopAppBar
+import com.example.core.ui.designsystem.components.utils.MySpacerColumn
 import com.example.feature.workout.R
 
 @Composable
@@ -59,13 +59,14 @@ private fun MainWorkoutScreen(
                 .navigationBarsPadding()
 
         ){
-            //starr workout button
+            //start workout button
             item {
-                Column {
-                    StartWorkoutButton(
-                        onClick = navigateToWorkout
-                    )
-                }
+                MySpacerColumn(300.dp)
+
+                StartWorkoutButton(
+                    onClick = navigateToWorkout
+                )
+
             }
         }
     }
