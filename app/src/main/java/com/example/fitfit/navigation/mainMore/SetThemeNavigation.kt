@@ -14,11 +14,7 @@ import com.example.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
 import com.example.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
 import com.example.core.ui.designsystem.components.utils.MySpacerRow
 import com.example.feature.more.setTheme.SetThemeRoute
-import com.example.fitfit.navigation.TopEnterTransition
-import com.example.fitfit.navigation.TopExitTransition
 import com.example.fitfit.navigation.TopLevelDestination
-import com.example.fitfit.navigation.TopPopEnterTransition
-import com.example.fitfit.navigation.TopPopExitTransition
 import com.example.fitfit.navigation.enterTransition
 import com.example.fitfit.navigation.exitTransition
 import com.example.fitfit.navigation.popEnterTransition
@@ -27,7 +23,6 @@ import com.example.fitfit.ui.AppViewModel
 import com.example.fitfit.ui.ExternalState
 import com.example.fitfit.utils.WindowHeightSizeClass
 import com.example.fitfit.utils.WindowWidthSizeClass
-import kotlinx.coroutines.delay
 
 private val topLevelScreenDestination = TopLevelDestination.MORE
 private val screenDestination = ScreenDestination.SET_THEME

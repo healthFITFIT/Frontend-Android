@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.data.data.repository.PreferencesRepository
 import com.example.core.data.data.repository.signIn.SignInRepository
-import com.example.core.model.enums.ScreenDestination
-import com.example.fitfit.navigation.TopLevelDestination
 import com.example.core.model.data.DateTimeFormat
 import com.example.core.model.data.Theme
 import com.example.core.model.data.UserData

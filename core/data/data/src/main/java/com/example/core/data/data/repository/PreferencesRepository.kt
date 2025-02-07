@@ -1,11 +1,11 @@
 package com.example.core.data.data.repository
 
 import com.example.core.data.datastore.SettingsLocalDataSource
+import com.example.core.model.data.DateTimeFormat
+import com.example.core.model.data.Theme
 import com.example.core.model.enums.AppTheme
 import com.example.core.model.enums.DateFormat
 import com.example.core.model.enums.TimeFormat
-import com.example.core.model.data.DateTimeFormat
-import com.example.core.model.data.Theme
 import javax.inject.Inject
 
 class PreferencesRepository @Inject constructor(

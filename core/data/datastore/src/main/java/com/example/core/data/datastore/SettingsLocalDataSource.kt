@@ -1,10 +1,10 @@
 package com.example.core.data.datastore
 
+import com.example.core.model.data.DateTimeFormat
+import com.example.core.model.data.Theme
 import com.example.core.model.enums.AppTheme
 import com.example.core.model.enums.DateFormat
 import com.example.core.model.enums.TimeFormat
-import com.example.core.model.data.DateTimeFormat
-import com.example.core.model.data.Theme
 
 interface SettingsLocalDataSource {
 
