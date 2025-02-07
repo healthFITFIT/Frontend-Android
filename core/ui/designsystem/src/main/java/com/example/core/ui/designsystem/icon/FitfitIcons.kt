@@ -27,8 +27,7 @@ import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.icons.rounded.FitnessCenter
-import androidx.compose.material.icons.rounded.FlashOff
-import androidx.compose.material.icons.rounded.FlashOn
+import androidx.compose.material.icons.rounded.FlipCameraAndroid
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
@@ -38,11 +37,11 @@ import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.MoreTime
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material.icons.rounded.NoPhotography
 import androidx.compose.material.icons.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.material.icons.rounded.QrCode
-import androidx.compose.material.icons.rounded.QrCodeScanner
 import androidx.compose.material.icons.rounded.Route
 import androidx.compose.material.icons.rounded.Schedule
 import androidx.compose.material.icons.rounded.Search
@@ -156,10 +155,9 @@ object MyIcons {
     val viewOnly = MyIcon(Icons.Rounded.Visibility,     24.dp, true, null, R.string.example)
     val allowEdit = MyIcon(Icons.Rounded.Edit,          24.dp, true, null, R.string.example)
 
-    //invite friend
-    val qrCode = MyIcon(Icons.Rounded.QrCodeScanner,    40.dp, false, null, null)
-    val flashOn = MyIcon(Icons.Rounded.FlashOn,         22.dp, false, null, R.string.example)
-    val flashOff = MyIcon(Icons.Rounded.FlashOff,       22.dp, false, null, R.string.example)
+    //workout
+    val noCamera = MyIcon(Icons.Rounded.NoPhotography,          40.dp, false, null, null)
+    val flipCamera = MyIcon(Icons.Rounded.FlipCameraAndroid,    40.dp, false, null, R.string.flip_camera)
 
     //date time
     val date = MyIcon(Icons.Rounded.CalendarMonth,      22.dp, true, null, R.string.example)

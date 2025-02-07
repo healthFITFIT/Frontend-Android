@@ -43,6 +43,7 @@ dependencies {
 
     //module
     implementation(project(":core:model"))
+    implementation(project(":core:utils"))
     implementation(project(":core:ui:designsystem"))
 
     //compose bom
@@ -61,6 +62,18 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    //permission
+    implementation(libs.google.accompanist.permissions)
+
+    //camera
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.compose)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.video)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.extentions)
 
     //test
     testImplementation(libs.junit)
