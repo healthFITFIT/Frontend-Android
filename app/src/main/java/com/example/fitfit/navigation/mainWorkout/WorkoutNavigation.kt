@@ -14,11 +14,7 @@ import com.example.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
 import com.example.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
 import com.example.core.ui.designsystem.components.utils.MySpacerRow
 import com.example.feature.workout.workout.WorkoutRoute
-import com.example.fitfit.navigation.TopEnterTransition
-import com.example.fitfit.navigation.TopExitTransition
 import com.example.fitfit.navigation.TopLevelDestination
-import com.example.fitfit.navigation.TopPopEnterTransition
-import com.example.fitfit.navigation.TopPopExitTransition
 import com.example.fitfit.navigation.enterTransition
 import com.example.fitfit.navigation.exitTransition
 import com.example.fitfit.navigation.popEnterTransition

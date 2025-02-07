@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.example.core.model.enums.ScreenDestination
 import com.example.fitfit.navigation.FitfitNavHost
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -52,8 +53,8 @@ fun FitfitApp(
 //        ScreenDestination.IMAGE -> systemUiController.setNavigationBarColor(color = Color.Transparent)
 //
         //top level destinations
-//        ScreenDestination.TRIPS, ScreenDestination.PROFILE, ScreenDestination.MORE
-//         -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surfaceDim)
+        ScreenDestination.MAIN_WORKOUT, ScreenDestination.MAIN_LOGS, ScreenDestination.MAIN_MORE
+         -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surfaceDim)
 
         else -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surface)
     }

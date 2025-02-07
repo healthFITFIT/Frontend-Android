@@ -7,15 +7,11 @@ import androidx.compose.material.icons.automirrored.rounded.List
 import androidx.compose.material.icons.automirrored.rounded.Login
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.automirrored.rounded.Send
-import androidx.compose.material.icons.outlined.FitnessCenter
 import androidx.compose.material.icons.outlined.Keyboard
-import androidx.compose.material.icons.outlined.Luggage
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material.icons.outlined.Palette
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.rounded.AccessTime
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Bolt
 import androidx.compose.material.icons.rounded.Bookmarks
 import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material.icons.rounded.Close
@@ -30,30 +26,22 @@ import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
-import androidx.compose.material.icons.rounded.FileDownload
 import androidx.compose.material.icons.rounded.FitnessCenter
-import androidx.compose.material.icons.rounded.FlashOff
-import androidx.compose.material.icons.rounded.FlashOn
+import androidx.compose.material.icons.rounded.FlipCameraAndroid
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
-import androidx.compose.material.icons.rounded.List
 import androidx.compose.material.icons.rounded.LocationOff
-import androidx.compose.material.icons.rounded.LocationOn
-import androidx.compose.material.icons.rounded.Logout
 import androidx.compose.material.icons.rounded.Luggage
-import androidx.compose.material.icons.rounded.ManageAccounts
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.MoreTime
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material.icons.rounded.NoPhotography
 import androidx.compose.material.icons.rounded.OpenInNew
+import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.Payments
-import androidx.compose.material.icons.rounded.People
-import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material.icons.rounded.PersonAdd
 import androidx.compose.material.icons.rounded.QrCode
-import androidx.compose.material.icons.rounded.QrCodeScanner
 import androidx.compose.material.icons.rounded.Route
 import androidx.compose.material.icons.rounded.Schedule
 import androidx.compose.material.icons.rounded.Search
@@ -102,15 +90,16 @@ object IconTextButtonIcon {
     val rightArrow = MyIcon(Icons.Rounded.KeyboardArrowRight, 30.dp, false, null, R.string.example)
 }
 
+object IconButtonIcon {
+    val stop = MyIcon(Icons.Rounded.Close,     34.dp, false, null, R.string.stop)
+    val pause = MyIcon(Icons.Rounded.Pause,    30.dp, false, null, R.string.pause)
+}
+
 object FabIcon {
     val add = MyIcon(Icons.Rounded.Add, 24.dp, false, null, R.string.example)
     val map = MyIcon(Icons.Rounded.Map, 22.dp, false, null, R.string.example)
 }
 
-object MapButtonIcon {
-    val focusOnToTarget = MyIcon(Icons.Rounded.LocationOn,          24.dp, false, null, R.string.example)
-    val disabledFocusOnToTarget = MyIcon(Icons.Rounded.LocationOn,  24.dp, true, null, R.string.example)
-}
 
 
 
@@ -119,12 +108,12 @@ object MapButtonIcon {
 object MyIcons {
 
     //error
-    val error = MyIcon(Icons.Rounded.ErrorOutline,              40.dp, false, null, R.string.example)
+    val error = MyIcon(Icons.Rounded.ErrorOutline,              40.dp, false, null, R.string.error)
 
     //sign in screen
-    val signIn = MyIcon(Icons.AutoMirrored.Rounded.Login,       36.dp, true, null, R.string.example)
-    val internetUnavailable = MyIcon(Icons.Rounded.CloudOff,    40.dp, true, null, R.string.example)
-    val internetUnavailableWhite = MyIcon(Icons.Rounded.CloudOff, 40.dp, false, Color.White, R.string.example)
+    val signIn = MyIcon(Icons.AutoMirrored.Rounded.Login,       36.dp, true, null, R.string.sign_in)
+    val internetUnavailable = MyIcon(Icons.Rounded.CloudOff,    40.dp, true, null, R.string.internet_unavailable)
+    val internetUnavailableWhite = MyIcon(Icons.Rounded.CloudOff, 40.dp, false, Color.White, R.string.internet_unavailable)
 
     //no item
     val noTrips = MyIcon(Icons.Rounded.Luggage,       40.dp, true, null, R.string.example)
@@ -166,10 +155,9 @@ object MyIcons {
     val viewOnly = MyIcon(Icons.Rounded.Visibility,     24.dp, true, null, R.string.example)
     val allowEdit = MyIcon(Icons.Rounded.Edit,          24.dp, true, null, R.string.example)
 
-    //invite friend
-    val qrCode = MyIcon(Icons.Rounded.QrCodeScanner,    40.dp, false, null, null)
-    val flashOn = MyIcon(Icons.Rounded.FlashOn,         22.dp, false, null, R.string.example)
-    val flashOff = MyIcon(Icons.Rounded.FlashOff,       22.dp, false, null, R.string.example)
+    //workout
+    val noCamera = MyIcon(Icons.Rounded.NoPhotography,          40.dp, false, null, null)
+    val flipCamera = MyIcon(Icons.Rounded.FlipCameraAndroid,    40.dp, false, null, R.string.flip_camera)
 
     //date time
     val date = MyIcon(Icons.Rounded.CalendarMonth,      22.dp, true, null, R.string.example)
@@ -177,10 +165,6 @@ object MyIcons {
     val setTime = MyIcon(Icons.Rounded.MoreTime,        20.dp, true, null, R.string.example)
     val rightArrowTo = MyIcon(Icons.Rounded.East,       22.dp, true, null, R.string.example)
     val rightArrowToSmall = MyIcon(Icons.Rounded.East,  18.dp, true, null, R.string.example)
-
-    //trip creation options dialog
-    val manual = MyIcon(Icons.Rounded.Edit,    26.dp, false, null, null)
-    val ai = MyIcon(Icons.Rounded.Bolt,         26.dp, false, null, null)
 
     //set time dialog
     val switchToTextInput = MyIcon(Icons.Outlined.Keyboard,   22.dp, true, null, R.string.example)
@@ -192,13 +176,6 @@ object MyIcons {
     val travelDistance = MyIcon(Icons.Rounded.Route, 20.dp, true, null, R.string.example)
 
     //setting
-    val openInNew = MyIcon(Icons.Rounded.OpenInNew,     22.dp, true, null, R.string.example)
+    val openInNew = MyIcon(Icons.Rounded.OpenInNew,     22.dp, true, null, R.string.open_in_new)
     val sendEmail = MyIcon(Icons.AutoMirrored.Rounded.Send,     22.dp, true, null, R.string.example)
-
-    //share trip
-    val deleteFriend = MyIcon(Icons.Rounded.Close,      24.dp, true, null, R.string.example)
-    val friends = MyIcon(Icons.Rounded.People,          22.dp, true, null, R.string.example)
-    val inviteFriend = MyIcon(Icons.Rounded.PersonAdd,  22.dp, false, null, R.string.example)
-    val manager = MyIcon(Icons.Rounded.ManageAccounts,  22.dp, true, null, R.string.example)
-    val leaveTrip = MyIcon(Icons.Rounded.Logout,           24.dp, true, null, R.string.example)
 }

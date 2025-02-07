@@ -4,6 +4,8 @@
     <string name="workout">Workout</string>
 
     <!--workout =================================================================================-->
-
+    <!--component/CameraCard -->
+    <string name="camera_permission_denied">Camera permissions denied</string>
+    <string name="please_allow_camera_permissions">Please allow camera permissions in settings.\n(Settings > Permissions > Camera >\nWhile using the app or Ask every time)</string>
 
 </resources>

@@ -3,6 +3,11 @@
     <string name="example">example</string>
 
     <!--component/button/ =======================================================================-->
+    <!-- AccountButtons.kt -->
+    <string name="delete_account">Delete account</string>
+    <string name="change_image">Change image</string>
+    <string name="delete_image">Delete image</string>
+
     <!-- AuthButtons.kt -->
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_in_with_apple">Sign in with Apple</string>
@@ -15,12 +20,19 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
-    <!-- buttons.kt -->
-    <string name="privacy_policy">Privacy policy</string>
+    <!-- MainWorkoutButtons.kt -->
     <string name="start_workout">Start Workout</string>
+
+    <!-- PrivacyPolicyButton.kt -->
+    <string name="privacy_policy">Privacy policy</string>
+
+    <!-- TextButtons.kt -->
     <string name="try_again">Try again</string>
-    <string name="delete_account">Delete account</string>
-    <string name="change_image">Change image</string>
+    <string name="settings">Settings</string>
+
+    <!-- WorkoutButtons.kt -->
+    <string name="next_workout">Next workout</string>
+
 
     <!--component/topAppBars/ ===================================================================-->
     <!-- FitfitTopAppBar.kt -->
@@ -41,10 +53,15 @@
 
     <!--IconTextButtonIcon-->
 
+    <!--IconTextButtonIcon-->
+    <string name="stop">Stop</string>
+    <string name="pause">Pause</string>
 
     <!--MyIcons-->
     <string name="error">Error</string>
-    <string name="delete_image">Delete image</string>
+    <string name="sign_in">Sign in</string>
+    <string name="flip_camera">Flip camera</string>
+    <string name="open_in_new">Open in new</string>
 
 
 </resources>

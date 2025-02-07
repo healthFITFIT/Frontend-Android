@@ -14,6 +14,7 @@ import com.example.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
 import com.example.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
 import com.example.core.ui.designsystem.components.utils.MySpacerRow
 import com.example.feature.more.mainMore.MainMoreRoute
+import com.example.fitfit.BuildConfig
 import com.example.fitfit.navigation.TopEnterTransition
 import com.example.fitfit.navigation.TopExitTransition
 import com.example.fitfit.navigation.TopLevelDestination
@@ -24,7 +25,6 @@ import com.example.fitfit.ui.ExternalState
 import com.example.fitfit.utils.WindowHeightSizeClass
 import com.example.fitfit.utils.WindowWidthSizeClass
 import kotlinx.coroutines.delay
-import com.example.fitfit.BuildConfig
 
 
 private val topLevelScreenDestination = TopLevelDestination.MORE
