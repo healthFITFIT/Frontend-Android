@@ -29,19 +29,19 @@ val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = pretendard,
         fontWeight = FontWeight.Bold,
-        fontSize = 23.sp,
+        fontSize = 26.sp,
         lineHeight = 23.sp * 1.4
     ),
     displayMedium = TextStyle(
         fontFamily = pretendard,
         fontWeight = FontWeight.Normal,
-        fontSize = 21.sp,
+        fontSize = 24.sp,
         lineHeight = 21.sp * 1.4
     ),
     displaySmall = TextStyle(
         fontFamily = pretendard,
         fontWeight = FontWeight.Normal,
-        fontSize = 19.sp,
+        fontSize = 22.sp,
         lineHeight = 19.sp * 1.4
     ),
 

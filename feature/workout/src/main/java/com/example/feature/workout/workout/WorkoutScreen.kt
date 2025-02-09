@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.ui.designsystem.components.MyScaffold
 import com.example.feature.workout.workout.component.CameraCard
+import com.example.feature.workout.workout.component.ExerciseNameAndPeriodTime
+import com.example.feature.workout.workout.component.SetsRepsWeight
 import com.example.feature.workout.workout.component.WorkoutButtons
 
 @Composable
@@ -28,12 +29,14 @@ fun WorkoutRoute(
     val workoutUiState by workoutViewModel.workoutUiState.collectAsState()
 
     WorkoutScreen(
+        currentExerciseUiState = workoutUiState.currentExerciseUiState,
         cameraPreviewViewModel = cameraPreviewViewModel
     )
 }
 
 @Composable
 private fun WorkoutScreen(
+    currentExerciseUiState: CurrentExerciseUiState,
     cameraPreviewViewModel: CameraPreviewViewModel
 ){
     MyScaffold(
@@ -57,11 +60,20 @@ private fun WorkoutScreen(
                 modifier = Modifier.weight(1f)
             )
 
-            //workout name / period time
-            Text("PULL UP     20:10")
+            //exercise name / period time
+            ExerciseNameAndPeriodTime(
+                exercise = currentExerciseUiState.exercise,
+                periodTime = currentExerciseUiState.periodTime
+            )
 
             //set / reps / weight
-            Text("10 SET   8/15 REPS    20kg")
+            SetsRepsWeight(
+                sets = currentExerciseUiState.sets,
+                goalSets = currentExerciseUiState.goalSets,
+                reps = currentExerciseUiState.reps,
+                goalReps = currentExerciseUiState.goalReps,
+                weight = currentExerciseUiState.weight
+            )
 
             //buttons
             WorkoutButtons(
