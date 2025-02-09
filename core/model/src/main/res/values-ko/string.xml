@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--enums/ ==================================================================================-->
     <!--DateTime.kt-->
     <string name="ymd">년 월 일</string>
     <string name="dmy">일 월 년</string>
@@ -12,5 +13,13 @@
     <string name="theme_light">밝은 테마</string>
     <string name="theme_dark">어두운 테마</string>
     <string name="theme_auto">기기 테마와 동일</string>
+
+    <!--workout/ ================================================================================-->
+    <!--WorkoutName.kt-->
+    <string name="squat">스쿼트</string>
+    <string name="pull_up">턱걸이</string>
+    <string name="push_up">팔굽혀펴기</string>
+    <string name="side_lateral_raise">사이드 레터럴 레이즈</string>
+
 
 </resources>

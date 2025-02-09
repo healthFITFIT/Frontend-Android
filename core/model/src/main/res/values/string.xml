@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--enums/ ==================================================================================-->
     <!--DateTime.kt-->
     <string name="ymd">Y M D</string>
     <string name="dmy">D M Y</string>
@@ -12,5 +13,13 @@
     <string name="theme_light">Light theme</string>
     <string name="theme_dark">Dark theme</string>
     <string name="theme_auto">Same as device theme</string>
+
+    <!--workout/ ================================================================================-->
+    <!--WorkoutName.kt-->
+    <string name="squat">Squat</string>
+    <string name="pull_up">Pull Up</string>
+    <string name="push_up">Push Up</string>
+    <string name="side_lateral_raise">Side Lateral Raise</string>
+
 
 </resources>

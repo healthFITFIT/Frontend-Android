@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.core.ui.designsystem.components.button.FlipCameraButton
 import com.example.core.ui.designsystem.components.button.SettingsButton
 import com.example.core.ui.designsystem.components.utils.MyCard
 import com.example.core.ui.designsystem.components.utils.MySpacerColumn
@@ -58,20 +60,9 @@ fun CameraCard(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .clip(MaterialTheme.shapes.medium),
+            .clip(MaterialTheme.shapes.extraLarge),
         contentAlignment = Alignment.Center
     ) {
-
-        //camera
-        AnimatedVisibility(
-            visible = cameraPermissionState.status.isGranted,
-            enter = fadeIn(tween(500)),
-            exit = fadeOut(tween(500))
-        ) {
-            CameraPreviewContent(
-                cameraPreviewViewModel = cameraPreviewViewModel
-            )
-        }
 
         //check permission text
         AnimatedVisibility(
@@ -90,6 +81,17 @@ fun CameraCard(
                 }
             )
         }
+
+        //camera
+        AnimatedVisibility(
+            visible = cameraPermissionState.status.isGranted,
+            enter = fadeIn(tween(500)),
+            exit = fadeOut(tween(500))
+        ) {
+            CameraPreviewContent(
+                cameraPreviewViewModel = cameraPreviewViewModel
+            )
+        }
     }
 }
 
@@ -106,10 +108,28 @@ fun CameraPreviewContent(
         cameraPreviewViewModel.bindToCamera(context.applicationContext, lifecycleOwner)
     }
 
-    surfaceRequest?.let { request ->
-        CameraXViewfinder(
-            surfaceRequest = request
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomStart
+    ) {
+        //camera preview
+        surfaceRequest?.let { request ->
+            CameraXViewfinder(
+                surfaceRequest = request
+            )
+        }
+
+        //flip camera button
+        FlipCameraButton(
+            onClick = {
+                cameraPreviewViewModel.flipCamera(lifecycleOwner)
+            },
+            modifier = Modifier.padding(16.dp)
         )
+
+
+        //stop/resume recognition button
+
     }
 }
 
