@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
@@ -39,7 +40,7 @@ internal fun SetsRepsWeight(
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.Bottom,
-            modifier = Modifier.widthIn(max = itemMaxWidthSmall)
+            modifier = Modifier.widthIn(max = itemMaxWidthSmall).height(92.dp)
         ) {
             MySpacerRow(16.dp)
 
