@@ -157,7 +157,7 @@ object MyIcons {
 
     //workout
     val noCamera = MyIcon(Icons.Rounded.NoPhotography,          40.dp, false, null, null)
-    val flipCamera = MyIcon(Icons.Rounded.FlipCameraAndroid,    40.dp, false, null, R.string.flip_camera)
+    val flipCamera = MyIcon(Icons.Rounded.FlipCameraAndroid,    30.dp, false, null, R.string.flip_camera)
 
     //date time
     val date = MyIcon(Icons.Rounded.CalendarMonth,      22.dp, true, null, R.string.example)
