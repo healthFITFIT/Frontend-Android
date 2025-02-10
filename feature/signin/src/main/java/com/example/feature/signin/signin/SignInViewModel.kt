@@ -35,7 +35,7 @@ class SignInViewModel @Inject constructor(
     val signInUiState = _signInUiState.asStateFlow()
 
     init {
-        //init commonTripUiState
+        //init commonUiState
         commonUiStateRepository._commonUiState.update {
             CommonUiState()
         }

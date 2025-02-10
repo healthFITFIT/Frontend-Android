@@ -40,7 +40,7 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(project(":core:data:credentials"))
-    implementation(project(":core:data:datastore"))
+    implementation(project(":core:data:settings"))
 
     //
     implementation(libs.androidx.core.ktx)
