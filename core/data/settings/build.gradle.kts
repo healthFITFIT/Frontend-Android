@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.data.datastore"
+    namespace = "com.example.core.data.settings"
     compileSdk = 35
 
     defaultConfig {

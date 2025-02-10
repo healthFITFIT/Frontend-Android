@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.data.retrofit"
+    namespace = "com.example.core.data.remote_db"
     compileSdk = 35
 
     defaultConfig {
