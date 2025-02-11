@@ -31,7 +31,7 @@
     <string name="settings">설정</string>
 
     <!-- WorkoutButtons.kt -->
-    <string name="next_workout">다음 운동</string>
+    <string name="next_exercise">다음 운동</string>
 
 
     <!--component/topAppBars/ ===================================================================-->

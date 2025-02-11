@@ -40,12 +40,12 @@ fun PauseButton(
 }
 
 @Composable
-fun NextWorkoutButton(
+fun NextExerciseButton(
     onClick: () -> Unit
 ){
     MyTextButton(
         modifier = Modifier.widthIn(min = 200.dp).height(56.dp),
-        text = stringResource(id = R.string.next_workout),
+        text = stringResource(id = R.string.next_exercise),
         onClick = onClick,
         textStyle = MaterialTheme.typography.titleSmall
     )

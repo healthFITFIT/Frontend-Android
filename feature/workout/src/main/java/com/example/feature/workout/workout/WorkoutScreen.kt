@@ -1,6 +1,5 @@
 package com.example.feature.workout.workout
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,9 +16,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.ui.designsystem.components.MyScaffold
 import com.example.core.ui.designsystem.components.utils.MySpacerColumn
 import com.example.feature.workout.workout.component.CameraCard
-import com.example.feature.workout.workout.component.ExerciseNameAndPeriodTime
-import com.example.feature.workout.workout.component.SetsRepsWeight
+import com.example.feature.workout.workout.component.PeriodTime
 import com.example.feature.workout.workout.component.WorkoutButtons
+import com.example.feature.workout.workout.component.exerciseInfo.ExerciseInfo
 
 @Composable
 fun WorkoutRoute(
@@ -59,26 +58,24 @@ private fun WorkoutScreen(
                 cameraPreviewViewModel = cameraPreviewViewModel,
                 modifier = Modifier.weight(1f)
             )
-
-            MySpacerColumn(8.dp)
-
-            //exercise name / period time
-            ExerciseNameAndPeriodTime(
-                exercise = currentExerciseUiState.exercise,
-                periodTime = currentExerciseUiState.periodTime,
-                onClickExercise = {
-                    //open select exercise dialog
-                }
+            
+            //period time
+            PeriodTime(
+                periodTime = currentExerciseUiState.periodTime
             )
 
-            //set / reps / weight
-            SetsRepsWeight(
+            //exercise info
+            ExerciseInfo(
+                exercise = currentExerciseUiState.exercise,
+                onClickExercise = { },
                 sets = currentExerciseUiState.sets,
                 goalSets = currentExerciseUiState.goalSets,
                 reps = currentExerciseUiState.reps,
                 goalReps = currentExerciseUiState.goalReps,
                 weight = currentExerciseUiState.weight
             )
+
+            MySpacerColumn(16.dp)
 
             //buttons
             WorkoutButtons(
