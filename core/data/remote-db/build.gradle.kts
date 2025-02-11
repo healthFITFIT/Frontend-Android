@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
 
     alias(libs.plugins.googleDevToolsKsp)
+
+    //serialization
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -51,6 +54,9 @@ dependencies {
     //retrofit
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.converter.moshi)
+
+    //serialization
+    implementation(libs.kotlinx.serialization.json)
 
     //test
     testImplementation(libs.junit)

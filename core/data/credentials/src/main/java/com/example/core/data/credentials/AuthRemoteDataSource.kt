@@ -11,6 +11,7 @@ interface AuthRemoteDataSource{
 
     suspend fun signinWithGoogle(
         context: Context,
+        onResult: (String) -> Unit,
         onError: () -> Unit
     )
 

@@ -41,6 +41,7 @@ dependencies {
 
     implementation(project(":core:data:credentials"))
     implementation(project(":core:data:settings"))
+    implementation(project(":core:data:remote-db"))
 
     //
     implementation(libs.androidx.core.ktx)

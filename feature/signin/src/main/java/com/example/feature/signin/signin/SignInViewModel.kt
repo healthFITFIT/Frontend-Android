@@ -1,11 +1,6 @@
 package com.example.feature.signin.signin
 
-import android.app.Activity
 import android.content.Context
-import android.util.Log
-import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.IntentSenderRequest
 import androidx.lifecycle.ViewModel
 import com.example.core.data.data.repository.CommonUiState
 import com.example.core.data.data.repository.CommonUiStateRepository
@@ -73,6 +68,7 @@ class SignInViewModel @Inject constructor(
         onError: () -> Unit
     ){
         //FIXME: when user cancel it, not to show error snack bar
+
         setIsSigningIn(true)
         signInRepository.signInWithGoogle(
             context = context,
@@ -83,49 +79,49 @@ class SignInViewModel @Inject constructor(
         )
     }
 
-    suspend fun signInLaunchGoogleLauncher(
-        launcher: ManagedActivityResultLauncher<IntentSenderRequest, ActivityResult>,
-        showErrorSnackbar: () -> Unit
-    ) {
-        setIsSigningIn(true)
-        signInRepository.signInLaunchGoogleLauncher(
-            launcher = launcher,
-            signInError = {
-                setIsSigningIn(false)
-                showErrorSnackbar()
-            }
-        )
-    }
+//    suspend fun signInLaunchGoogleLauncher(
+//        launcher: ManagedActivityResultLauncher<IntentSenderRequest, ActivityResult>,
+//        showErrorSnackbar: () -> Unit
+//    ) {
+//        setIsSigningIn(true)
+//        signInRepository.signInLaunchGoogleLauncher(
+//            launcher = launcher,
+//            signInError = {
+//                setIsSigningIn(false)
+//                showErrorSnackbar()
+//            }
+//        )
+//    }
 
-    suspend fun signInWithGoogleResult(
-        result: ActivityResult,
-        onDone: (userData: UserData) -> Unit,
-        showErrorSnackbar: () -> Unit
-    ){
-        if (result.resultCode == Activity.RESULT_OK){
-            if (result.data == null){
-                setIsSigningIn(false)
-                return
-            }
-
-            //get signInResult from remote(firebase)
-            var userData = signInRepository.signInWithGoogleIntent(
-                intent = result.data!!
-            )
-
-
-            Log.d(SIGN_IN_VIEWMODEL_TAG, "signInWithGoogleResult - userData : $userData")
-
-            updateUserDataFromRemote(
-                userData = userData,
-                onDone = onDone,
-                showErrorSnackbar = showErrorSnackbar
-            )
-        }
-        else {
-            setIsSigningIn(false)
-        }
-    }
+//    suspend fun signInWithGoogleResult(
+//        result: ActivityResult,
+//        onDone: (userData: UserData) -> Unit,
+//        showErrorSnackbar: () -> Unit
+//    ){
+//        if (result.resultCode == Activity.RESULT_OK){
+//            if (result.data == null){
+//                setIsSigningIn(false)
+//                return
+//            }
+//
+//            //get signInResult from remote(firebase)
+//            var userData = signInRepository.signInWithGoogleIntent(
+//                intent = result.data!!
+//            )
+//
+//
+//            Log.d(SIGN_IN_VIEWMODEL_TAG, "signInWithGoogleResult - userData : $userData")
+//
+//            updateUserDataFromRemote(
+//                userData = userData,
+//                onDone = onDone,
+//                showErrorSnackbar = showErrorSnackbar
+//            )
+//        }
+//        else {
+//            setIsSigningIn(false)
+//        }
+//    }
 
 
 
