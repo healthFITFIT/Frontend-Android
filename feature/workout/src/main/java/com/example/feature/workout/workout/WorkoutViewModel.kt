@@ -19,7 +19,7 @@ data class CurrentExerciseUiState(
     val reps: Int = 16,
     val goalReps: Int = 25,
 
-    val weight: Float = 104.5f,
+    val weight: Float? = null,
 )
 
 

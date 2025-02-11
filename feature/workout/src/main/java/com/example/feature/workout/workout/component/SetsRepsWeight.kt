@@ -30,7 +30,7 @@ internal fun SetsRepsWeight(
     reps: Int,
     goalReps: Int,
 
-    weight: Float
+    weight: Float?
 ){
     val valueBigTextStyle = MaterialTheme.typography.displayLarge.copy(fontSize = 50.sp)
     val valueTextStyle = MaterialTheme.typography.displayLarge
@@ -176,12 +176,13 @@ private fun Reps(
 
 @Composable
 private fun Weight(
-    weight: Float,
+    weight: Float?,
     valueTextStyle: TextStyle,
     unitTextStyle: TextStyle
 ){
     val df = DecimalFormat("#.#")
-    val weightString = df.format(weight)
+    val weightNotNull = weight ?: 0f
+    val weightString = df.format(weightNotNull)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -189,7 +190,9 @@ private fun Weight(
     ) {
         Text(
             text = weightString,
-            style = valueTextStyle
+            style = valueTextStyle,
+            color = if (weight != null) MaterialTheme.colorScheme.onSurface
+                    else MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         MySpacerColumn(4.dp)
