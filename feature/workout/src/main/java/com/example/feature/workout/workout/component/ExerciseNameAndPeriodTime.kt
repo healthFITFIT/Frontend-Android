@@ -17,8 +17,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.core.model.workout.Exercise
 import com.example.core.ui.designsystem.components.utils.MySpacerRow
-import com.example.core.utils.secondToHourMinSec
+import com.example.core.ui.designsystem.icon.DisplayIcon
+import com.example.core.ui.designsystem.icon.MyIcons
 import com.example.core.utils.itemMaxWidthSmall
+import com.example.core.utils.secondToHourMinSec
 
 @Composable
 internal fun ExerciseNameAndPeriodTime(
@@ -56,10 +58,19 @@ internal fun ExerciseNameAndPeriodTime(
 private fun ExerciseName(
     exercise: Exercise
 ){
-    Text(
-        text = stringResource(exercise.textId),
-        style = MaterialTheme.typography.displayLarge
-    )
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = stringResource(exercise.textId),
+            style = MaterialTheme.typography.displayLarge
+        )
+
+        MySpacerRow(8.dp)
+
+        //expand icon
+        DisplayIcon(MyIcons.expand)
+    }
 }
 
 @Composable

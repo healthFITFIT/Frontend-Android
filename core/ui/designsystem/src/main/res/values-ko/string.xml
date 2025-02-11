@@ -59,7 +59,12 @@
 
     <!--MyIcons-->
     <string name="error">오류</string>
+
     <string name="sign_in">로그인</string>
+
+    <string name="expand">펼치기</string>
+    <string name="collapse">접기</string>
+
     <string name="flip_camera">카메라 전환</string>
     <string name="open_in_new">새 창에서 열기</string>
 

@@ -59,7 +59,12 @@
 
     <!--MyIcons-->
     <string name="error">Error</string>
+
     <string name="sign_in">Sign in</string>
+
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
+
     <string name="flip_camera">Flip camera</string>
     <string name="open_in_new">Open in new</string>
 
