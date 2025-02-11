@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.ui.designsystem.components.MyScaffold
+import com.example.core.ui.designsystem.components.utils.MySpacerColumn
 import com.example.feature.workout.workout.component.CameraCard
 import com.example.feature.workout.workout.component.ExerciseNameAndPeriodTime
 import com.example.feature.workout.workout.component.SetsRepsWeight
@@ -48,7 +49,6 @@ private fun WorkoutScreen(
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
@@ -60,10 +60,15 @@ private fun WorkoutScreen(
                 modifier = Modifier.weight(1f)
             )
 
+            MySpacerColumn(8.dp)
+
             //exercise name / period time
             ExerciseNameAndPeriodTime(
                 exercise = currentExerciseUiState.exercise,
-                periodTime = currentExerciseUiState.periodTime
+                periodTime = currentExerciseUiState.periodTime,
+                onClickExercise = {
+                    //open select exercise dialog
+                }
             )
 
             //set / reps / weight

@@ -2,10 +2,12 @@ package com.example.feature.workout.workout.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
@@ -16,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.core.model.workout.Exercise
+import com.example.core.ui.designsystem.components.utils.ClickableBox
 import com.example.core.ui.designsystem.components.utils.MySpacerRow
 import com.example.core.ui.designsystem.icon.DisplayIcon
 import com.example.core.ui.designsystem.icon.MyIcons
@@ -25,51 +28,46 @@ import com.example.core.utils.secondToHourMinSec
 @Composable
 internal fun ExerciseNameAndPeriodTime(
     exercise: Exercise,
-    periodTime: Int
+    periodTime: Int,
+
+    onClickExercise: () -> Unit
 ){
     val (hour, minute, second) = secondToHourMinSec(periodTime)
 
-    Row(
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.Top,
-        modifier = Modifier
-            .widthIn(max = itemMaxWidthSmall)
-            .height(36.dp)
+    Column(
+        modifier = Modifier.width(itemMaxWidthSmall)
     ) {
-        MySpacerRow(16.dp)
+
 
         ExerciseName(
-            exercise = exercise
+            exercise = exercise,
+            onClick = onClickExercise
         )
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        PeriodTime(
-            periodTimeHour = hour,
-            periodTimeMinute = minute,
-            periodTimeSecond = second
-        )
-
-        MySpacerRow(16.dp)
     }
 }
 
 @Composable
 private fun ExerciseName(
-    exercise: Exercise
+    exercise: Exercise,
+    onClick: () -> Unit
 ){
-    Row(
-        verticalAlignment = Alignment.CenterVertically
+    ClickableBox(
+        onClick = onClick
     ) {
-        Text(
-            text = stringResource(exercise.textId),
-            style = MaterialTheme.typography.displayLarge
-        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(16.dp, 8.dp)
+        ) {
+            Text(
+                text = stringResource(exercise.textId),
+                style = MaterialTheme.typography.displayLarge
+            )
 
-        MySpacerRow(8.dp)
+            MySpacerRow(8.dp)
 
-        //expand icon
-        DisplayIcon(MyIcons.expand)
+            //expand icon
+            DisplayIcon(MyIcons.expand)
+        }
     }
 }
 

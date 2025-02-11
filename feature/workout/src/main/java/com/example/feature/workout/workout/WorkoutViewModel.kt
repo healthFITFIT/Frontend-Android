@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 data class CurrentExerciseUiState(
-    val exercise: Exercise = Exercise.SQUAT,
+    val exercise: Exercise = Exercise.SIDE_LATERAL_RAISE,
     val periodTime: Int = 3473, //Hmmmmmmmmm.......
 
     val sets: Int = 3,
