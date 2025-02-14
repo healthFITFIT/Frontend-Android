@@ -35,6 +35,14 @@ private val exampleWorkout = WorkoutData(
             )
         ),
         WorkoutExercise(
+            exercise = Exercise.PUSH_UP,
+            sets = listOf(
+                ExerciseSet(reps = 30, weight = null),
+                ExerciseSet(reps = 20, weight = null),
+                ExerciseSet(reps = 10, weight = null),
+            )
+        ),
+        WorkoutExercise(
             exercise = Exercise.PULL_UP,
             sets = listOf(
                 ExerciseSet(reps = 15, weight = 30.0f),

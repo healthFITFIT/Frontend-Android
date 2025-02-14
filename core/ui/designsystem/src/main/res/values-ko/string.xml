@@ -31,7 +31,7 @@
     <string name="settings">설정</string>
 
     <!-- WorkoutButtons.kt -->
-    <string name="next_workout">다음 운동</string>
+    <string name="next_exercise">다음 운동</string>
 
 
     <!--component/topAppBars/ ===================================================================-->
@@ -59,7 +59,12 @@
 
     <!--MyIcons-->
     <string name="error">오류</string>
+
     <string name="sign_in">로그인</string>
+
+    <string name="expand">펼치기</string>
+    <string name="collapse">접기</string>
+
     <string name="flip_camera">카메라 전환</string>
     <string name="open_in_new">새 창에서 열기</string>
 

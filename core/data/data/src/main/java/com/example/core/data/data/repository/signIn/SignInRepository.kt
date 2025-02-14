@@ -1,18 +1,17 @@
 package com.example.core.data.data.repository.signIn
 
 import android.content.Context
-import android.content.Intent
-import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.IntentSenderRequest
+import android.util.Log
 import com.example.core.data.credentials.AuthRemoteDataSource
+import com.example.core.data.remote_db.DbRemoteDataSource
 import com.example.core.model.data.UserData
 import javax.inject.Inject
 
 private const val USER_REPOSITORY_TAG = "User-Repository"
 
 class SignInRepository @Inject constructor(
-    private val authRemoteDataSource: AuthRemoteDataSource //retrofit?
+    private val authRemoteDataSource: AuthRemoteDataSource, //credentials
+    private val dbRemoteDataSource: DbRemoteDataSource, //retrofit
 ) {
 
     //sign in ======================================================================================
@@ -20,34 +19,50 @@ class SignInRepository @Inject constructor(
         context: Context,
         onError: () -> Unit
     ){
+        //sign in -> get user idToken
         authRemoteDataSource.signinWithGoogle(
             context = context,
+            onResult = { userGoogleIdToken ->
+                Log.d(USER_REPOSITORY_TAG, "user idToken: $userGoogleIdToken")
+
+                dbRemoteDataSource.requestUserInfo(
+                    userGoogleIdToken = userGoogleIdToken,
+                    onResult = { userData: UserData ->
+
+                    },
+                    onError = onError
+                )
+            },
             onError = onError
         )
+
+        //send user idToken to backend -> get user info
+
     }
 
-    suspend fun signInLaunchGoogleLauncher(
-        launcher: ManagedActivityResultLauncher<IntentSenderRequest, ActivityResult>,
-        signInError : () -> Unit
-    ){
-        val signInIntentSender = authRemoteDataSource.getGoogleSignInIntentSender()
 
-        if (signInIntentSender == null) {
-            signInError()
-        }
-
-        launcher.launch(
-            IntentSenderRequest.Builder(
-                signInIntentSender ?: return
-            ).build()
-        )
-    }
-
-    suspend fun signInWithGoogleIntent(
-        intent: Intent
-    ): UserData? {
-        return authRemoteDataSource.signInWithGoogleIntent(intent)
-    }
+//    suspend fun signInLaunchGoogleLauncher(
+//        launcher: ManagedActivityResultLauncher<IntentSenderRequest, ActivityResult>,
+//        signInError : () -> Unit
+//    ){
+//        val signInIntentSender = authRemoteDataSource.getGoogleSignInIntentSender()
+//
+//        if (signInIntentSender == null) {
+//            signInError()
+//        }
+//
+//        launcher.launch(
+//            IntentSenderRequest.Builder(
+//                signInIntentSender ?: return
+//            ).build()
+//        )
+//    }
+//
+//    suspend fun signInWithGoogleIntent(
+//        intent: Intent
+//    ): UserData? {
+//        return authRemoteDataSource.signInWithGoogleIntent(intent)
+//    }
 
 
 

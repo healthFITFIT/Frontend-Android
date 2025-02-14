@@ -10,16 +10,16 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 data class CurrentExerciseUiState(
-    val exercise: Exercise = Exercise.SQUAT,
+    val exercise: Exercise = Exercise.SIDE_LATERAL_RAISE,
     val periodTime: Int = 3473, //Hmmmmmmmmm.......
 
-    val sets: Int = 3,
-    val goalSets: Int = 10,
+    val sets: Int = 1,
+    val goalSets: Int = 4,
 
-    val reps: Int = 16,
-    val goalReps: Int = 25,
+    val reps: Int = 0,
+    val goalReps: Int = 15,
 
-    val weight: Float = 104.5f,
+    val weight: Float? = null,
 )
 
 
@@ -50,6 +50,62 @@ class WorkoutViewModel @Inject constructor(
 //    fun setPeriodTime(duration: Int) {
 //
 //    }
+
+    //temp
+    fun setPrevSet() {
+        _workoutUiState.update {
+            it.copy(
+                currentExerciseUiState = it.currentExerciseUiState.copy(
+                    sets = it.currentExerciseUiState.sets - 1
+                )
+            )
+        }
+    }
+
+    fun setNextSet() {
+        _workoutUiState.update {
+            it.copy(
+                currentExerciseUiState = it.currentExerciseUiState.copy(
+                    sets = it.currentExerciseUiState.sets + 1,
+                    reps = 0
+                )
+            )
+        }
+    }
+
+    fun setMinusReps() {
+        _workoutUiState.update {
+            it.copy(
+                currentExerciseUiState = it.currentExerciseUiState.copy(
+                    reps = it.currentExerciseUiState.reps - 1
+                )
+            )
+        }
+    }
+
+    fun setPlusReps() {
+        _workoutUiState.update {
+            it.copy(
+                currentExerciseUiState = it.currentExerciseUiState.copy(
+                    reps = it.currentExerciseUiState.reps + 1
+                )
+            )
+        }
+    }
+
+    fun onNextExercise(){
+        _workoutUiState.update {
+            it.copy(
+                currentExerciseUiState = it.currentExerciseUiState.copy(
+                    sets = 0,
+                    reps = 0,
+                    exercise = Exercise.PUSH_UP
+                )
+            )
+        }
+    }
+
+
 
     fun updateWorkoutData(workoutData: WorkoutData) {
 

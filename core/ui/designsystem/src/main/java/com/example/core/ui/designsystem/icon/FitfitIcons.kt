@@ -134,8 +134,8 @@ object MyIcons {
     val clearInputText = MyIcon(Icons.Rounded.Close,    22.dp, false, null, R.string.example)
 
     //item expand collapse
-    val expand = MyIcon(Icons.Rounded.ExpandMore,   22.dp, true, null, R.string.example)
-    val collapse = MyIcon(Icons.Rounded.ExpandLess, 22.dp, true, null, R.string.example)
+    val expand = MyIcon(Icons.Rounded.ExpandMore,   22.dp, true, null, R.string.expand)
+    val collapse = MyIcon(Icons.Rounded.ExpandLess, 22.dp, true, null, R.string.collapse)
 
     //
     val delete = MyIcon(Icons.Rounded.Delete,            22.dp, true, null, R.string.example)

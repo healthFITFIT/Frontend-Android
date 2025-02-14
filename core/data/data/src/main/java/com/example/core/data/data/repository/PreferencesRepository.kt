@@ -1,6 +1,6 @@
 package com.example.core.data.data.repository
 
-import com.example.core.data.datastore.SettingsLocalDataSource
+import com.example.core.data.settings.SettingsLocalDataSource
 import com.example.core.model.data.DateTimeFormat
 import com.example.core.model.data.Theme
 import com.example.core.model.enums.AppTheme

@@ -18,11 +18,12 @@ import javax.inject.Inject
 private const val CREDENTIALS_TAG = "Credentials"
 
 class CredentialsApi @Inject constructor(
-//    @ApplicationContext private val context1: Context
+
 ): AuthRemoteDataSource {
 
     override suspend fun signinWithGoogle(
         context: Context, //activity based context
+        onResult: (String) -> Unit,
         onError: () -> Unit
     ) {
         val credentialManager = CredentialManager.create(context)
@@ -42,7 +43,8 @@ class CredentialsApi @Inject constructor(
                 context = context
             )
 
-            handleSignInWithGoogle(result)
+            val userGoogleIdToken = handleSignInWithGoogle(result)
+            onResult(userGoogleIdToken)
         } catch (e: GetCredentialException) {
             Log.d(CREDENTIALS_TAG, "error : $e")
             onError()
@@ -51,17 +53,20 @@ class CredentialsApi @Inject constructor(
 
     private fun handleSignInWithGoogle(
         result: GetCredentialResponse
-    ){
+    ): String {
         when (val credential = result.credential) {
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                     val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
                     val idToken = googleIdTokenCredential.idToken
-                    //send idToken to backend??????? TODO
-                    Log.d(CREDENTIALS_TAG, "idToken: $idToken")
+
+                    Log.d(CREDENTIALS_TAG, "user Google idToken: $idToken")
+                    return idToken
                 }
             }
         }
+        //FIXME ???????????
+        return ""
     }
 
     override suspend fun signInWithGoogleIntent(intent: Intent): UserData? {

@@ -2,11 +2,17 @@ package com.example.feature.workout.workout
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,10 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.ui.designsystem.components.MyScaffold
+import com.example.core.ui.designsystem.components.utils.ClickableBox
+import com.example.core.ui.designsystem.components.utils.MySpacerColumn
 import com.example.feature.workout.workout.component.CameraCard
-import com.example.feature.workout.workout.component.ExerciseNameAndPeriodTime
-import com.example.feature.workout.workout.component.SetsRepsWeight
+import com.example.feature.workout.workout.component.PeriodTime
 import com.example.feature.workout.workout.component.WorkoutButtons
+import com.example.feature.workout.workout.component.exerciseInfo.ExerciseInfo
 
 @Composable
 fun WorkoutRoute(
@@ -30,14 +38,26 @@ fun WorkoutRoute(
 
     WorkoutScreen(
         currentExerciseUiState = workoutUiState.currentExerciseUiState,
-        cameraPreviewViewModel = cameraPreviewViewModel
+        cameraPreviewViewModel = cameraPreviewViewModel,
+
+        onClickPrevSet = workoutViewModel::setPrevSet,
+        onClickNextSet = workoutViewModel::setNextSet,
+        onClickRepsMinus = workoutViewModel::setMinusReps,
+        onClickRepsPlus = workoutViewModel::setPlusReps,
+        onClickNextExercise = workoutViewModel::onNextExercise
     )
 }
 
 @Composable
 private fun WorkoutScreen(
     currentExerciseUiState: CurrentExerciseUiState,
-    cameraPreviewViewModel: CameraPreviewViewModel
+    cameraPreviewViewModel: CameraPreviewViewModel,
+
+    onClickPrevSet: () -> Unit = { },
+    onClickNextSet: () -> Unit = { },
+    onClickRepsMinus: () -> Unit = { },
+    onClickRepsPlus: () -> Unit = { },
+    onClickNextExercise: () -> Unit = { }
 ){
     MyScaffold(
         modifier = Modifier
@@ -48,7 +68,6 @@ private fun WorkoutScreen(
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
@@ -60,14 +79,15 @@ private fun WorkoutScreen(
                 modifier = Modifier.weight(1f)
             )
 
-            //exercise name / period time
-            ExerciseNameAndPeriodTime(
-                exercise = currentExerciseUiState.exercise,
+            //period time
+            PeriodTime(
                 periodTime = currentExerciseUiState.periodTime
             )
 
-            //set / reps / weight
-            SetsRepsWeight(
+            //exercise info
+            ExerciseInfo(
+                exercise = currentExerciseUiState.exercise,
+                onClickExercise = { },
                 sets = currentExerciseUiState.sets,
                 goalSets = currentExerciseUiState.goalSets,
                 reps = currentExerciseUiState.reps,
@@ -75,12 +95,76 @@ private fun WorkoutScreen(
                 weight = currentExerciseUiState.weight
             )
 
+            MySpacerColumn(16.dp)
+
+            //temp
+            TempButtons(
+                onClickPrevSet = onClickPrevSet,
+                onClickNextSet = onClickNextSet,
+                onClickRepsMinus = onClickRepsMinus,
+                onClickRepsPlus = onClickRepsPlus
+            )
+            MySpacerColumn(8.dp)
+
             //buttons
             WorkoutButtons(
                 onClickStop = { },
                 onClickPause = { },
-                onClickNextWorkout = { }
+                onClickNextWorkout = onClickNextExercise
             )
         }
+    }
+}
+
+@Composable
+private fun TempButtons(
+    onClickPrevSet: () -> Unit,
+    onClickNextSet: () -> Unit,
+    onClickRepsMinus: () -> Unit,
+    onClickRepsPlus: () -> Unit
+){
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        //prev set
+        TempButton(
+            text = "<",
+            onClick = onClickPrevSet
+        )
+
+        //next set
+        TempButton(
+            text = ">",
+            onClick = onClickNextSet
+        )
+
+        //reps -
+        TempButton(
+            text = "-",
+            onClick = onClickRepsMinus
+        )
+
+        //reps +
+        TempButton(
+            text = "+",
+            onClick = onClickRepsPlus
+        )
+    }
+}
+
+@Composable
+private fun TempButton(
+    text: String,
+    onClick: () -> Unit
+){
+    ClickableBox(
+        modifier = Modifier.size(48.dp),
+        onClick = onClick,
+        shape = CircleShape,
+        contentAlignment = Alignment.Center,
+        containerColor = MaterialTheme.colorScheme.surfaceBright
+    ) {
+        Text(text)
     }
 }
