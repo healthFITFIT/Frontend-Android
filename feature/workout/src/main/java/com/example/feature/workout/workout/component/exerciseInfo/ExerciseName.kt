@@ -33,6 +33,8 @@ internal fun ExerciseName(
                 .fillMaxWidth()
                 .padding(16.dp, 8.dp)
         ) {
+            MySpacerRow(30.dp)
+
             Text(
                 text = stringResource(exercise.textId),
                 style = MaterialTheme.typography.titleMedium
