@@ -24,7 +24,8 @@ internal fun ExerciseName(
 ){
     ClickableBox(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.large
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

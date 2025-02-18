@@ -118,7 +118,10 @@ private fun WorkoutScreen(
                 goalSets = currentExerciseUiState.goalSets,
                 reps = currentExerciseUiState.reps,
                 goalReps = currentExerciseUiState.goalReps,
-                weight = currentExerciseUiState.weight
+                weight = currentExerciseUiState.weight,
+                onClickSets = { },
+                onClickReps = { },
+                onClickWeight = { }
             )
 
             MySpacerColumn(16.dp)
