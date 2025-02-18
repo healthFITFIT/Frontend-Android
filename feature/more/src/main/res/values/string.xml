@@ -23,7 +23,10 @@
 
     <!--setDateTimeFormat =======================================================================-->
     <string name="date_time_format">Date time format</string>
-
+    <string name="time_format">Time format</string>
+    <string name="date_format">Date format</string>
+    <string name="use_month_name">Use month name</string>
+    <string name="include_day_of_week">Include day of week</string>
 
     <!--setTheme ================================================================================-->
     <string name="theme">Theme</string>
