@@ -264,7 +264,6 @@ fun FitfitNavHost(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
-                navigateToSomeScreen = { }
             )
 
             aboutScreen(

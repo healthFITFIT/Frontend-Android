@@ -68,7 +68,9 @@ fun NavGraphBuilder.mainWorkoutScreen(
             }
 
             MainWorkoutRoute(
-                navigateToWorkout = navigateToWorkout
+                navigateToWorkout = navigateToWorkout,
+                use2Panes = externalState.windowSizeClass.use2Panes,
+                spacerValue = externalState.windowSizeClass.spacerValue
             )
         }
     }
