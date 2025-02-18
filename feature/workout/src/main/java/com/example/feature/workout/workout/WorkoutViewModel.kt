@@ -25,7 +25,9 @@ data class CurrentExerciseUiState(
 
 data class WorkoutUiState(
     val currentExerciseUiState: CurrentExerciseUiState = CurrentExerciseUiState(),
-    val workoutData: WorkoutData = WorkoutData()
+    val workoutData: WorkoutData = WorkoutData(),
+
+    val showSelectExerciseDialog: Boolean = false
 )
 
 @HiltViewModel
@@ -101,6 +103,14 @@ class WorkoutViewModel @Inject constructor(
                     reps = 0,
                     exercise = Exercise.PUSH_UP
                 )
+            )
+        }
+    }
+
+    fun setShowSelectExerciseDialog(show: Boolean) {
+        _workoutUiState.update {
+            it.copy(
+                showSelectExerciseDialog = show
             )
         }
     }

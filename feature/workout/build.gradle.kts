@@ -43,6 +43,7 @@ dependencies {
 
     //module
     implementation(project(":core:model"))
+    implementation(project(":core:ui:ui"))
     implementation(project(":core:utils"))
     implementation(project(":core:ui:designsystem"))
 

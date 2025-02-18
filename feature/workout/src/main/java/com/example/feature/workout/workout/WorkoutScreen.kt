@@ -20,9 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.core.model.workout.Exercise
 import com.example.core.ui.designsystem.components.MyScaffold
 import com.example.core.ui.designsystem.components.utils.ClickableBox
 import com.example.core.ui.designsystem.components.utils.MySpacerColumn
+import com.example.core.ui.ui.dialog.SelectExerciseDialog
 import com.example.feature.workout.workout.component.CameraCard
 import com.example.feature.workout.workout.component.PeriodTime
 import com.example.feature.workout.workout.component.WorkoutButtons
@@ -40,6 +42,12 @@ fun WorkoutRoute(
         currentExerciseUiState = workoutUiState.currentExerciseUiState,
         cameraPreviewViewModel = cameraPreviewViewModel,
 
+        showSelectExerciseDialog = workoutUiState.showSelectExerciseDialog,
+
+        setShowSelectExerciseDialog = workoutViewModel::setShowSelectExerciseDialog,
+
+        setCurrentExercise = workoutViewModel::setExercise,
+
         onClickPrevSet = workoutViewModel::setPrevSet,
         onClickNextSet = workoutViewModel::setNextSet,
         onClickRepsMinus = workoutViewModel::setMinusReps,
@@ -53,6 +61,12 @@ private fun WorkoutScreen(
     currentExerciseUiState: CurrentExerciseUiState,
     cameraPreviewViewModel: CameraPreviewViewModel,
 
+    showSelectExerciseDialog: Boolean,
+
+    setShowSelectExerciseDialog: (Boolean) -> Unit,
+
+    setCurrentExercise: (exercise: Exercise) -> Unit,
+
     onClickPrevSet: () -> Unit = { },
     onClickNextSet: () -> Unit = { },
     onClickRepsMinus: () -> Unit = { },
@@ -65,6 +79,18 @@ private fun WorkoutScreen(
             .displayCutoutPadding()
             .imePadding(),
     ){ paddingValues ->
+
+        //dialog
+        if (showSelectExerciseDialog){
+            SelectExerciseDialog(
+                initialExercise = currentExerciseUiState.exercise,
+                onOkClick = { it ->
+                    setCurrentExercise(it)
+                    setShowSelectExerciseDialog(false)
+                },
+                onDismissRequest = { setShowSelectExerciseDialog(false) }
+            )
+        }
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -87,7 +113,7 @@ private fun WorkoutScreen(
             //exercise info
             ExerciseInfo(
                 exercise = currentExerciseUiState.exercise,
-                onClickExercise = { },
+                onClickExercise = { setShowSelectExerciseDialog(true) },
                 sets = currentExerciseUiState.sets,
                 goalSets = currentExerciseUiState.goalSets,
                 reps = currentExerciseUiState.reps,

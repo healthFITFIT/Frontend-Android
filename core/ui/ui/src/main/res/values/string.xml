@@ -4,8 +4,15 @@
     <!-- AppIconWithAppNameCard.kt -->
 
 
+
+    <!--dialog/component/ =======================================================================-->
+    <!-- DialogButton.kt -->
+    <string name="button_cancel">Cancel</string>
+    <string name="button_ok">OK</string>
+
     <!--dialog/ =================================================================================-->
-    <!--DateRangeDialog.kt-->
+    <!-- SelectExerciseDialog.kt -->
+    <string name="select_exercise">Select exercise</string>
 
 
     <!--item/ ===================================================================================-->
