@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -23,6 +24,7 @@ import com.example.fitfit.ui.AppViewModel
 import com.example.fitfit.ui.ExternalState
 import com.example.fitfit.utils.WindowHeightSizeClass
 import com.example.fitfit.utils.WindowWidthSizeClass
+import kotlinx.coroutines.launch
 
 private val topLevelScreenDestination = TopLevelDestination.MORE
 private val screenDestination = ScreenDestination.SET_THEME
@@ -35,7 +37,6 @@ fun NavGraphBuilder.setThemeScreen(
     externalState: ExternalState,
 
     navigateUp: () -> Unit,
-    navigateToSomeScreen: () -> Unit,
 ) {
     composable(
         route = screenDestination.route,
@@ -48,26 +49,20 @@ fun NavGraphBuilder.setThemeScreen(
             appViewModel.updateCurrentScreenDestination(screenDestination)
         }
 
+        val coroutineScope = rememberCoroutineScope()
+
         val appUiState by appViewModel.appUiState.collectAsState()
 
-        val widthSizeClass = externalState.windowSizeClass.widthSizeClass
-        val heightSizeClass = externalState.windowSizeClass.heightSizeClass
-
-        Row {
-            if (widthSizeClass == WindowWidthSizeClass.Compact) {
-                MySpacerRow(width = 0.dp)
-            } else if (
-                heightSizeClass == WindowHeightSizeClass.Compact
-                || widthSizeClass == WindowWidthSizeClass.Medium
-            ) {
-                MySpacerRow(width = NAVIGATION_RAIL_BAR_WIDTH)
-            } else if (widthSizeClass == WindowWidthSizeClass.Expanded) {
-                MySpacerRow(width = NAVIGATION_DRAWER_BAR_WIDTH)
-            }
-
-            SetThemeRoute(
-                navigateUp = navigateUp
-            )
-        }
+        SetThemeRoute(
+            use2Panes = externalState.windowSizeClass.use2Panes,
+            spacerValue = externalState.windowSizeClass.spacerValue,
+            theme = appUiState.appPreferences.theme,
+            updatePreferencesValue = {
+                coroutineScope.launch{
+                    appViewModel.getAppPreferencesValue()
+                }
+            },
+            navigateUp = navigateUp
+        )
     }
 }
