@@ -14,6 +14,10 @@
     <!-- SelectExerciseDialog.kt -->
     <string name="select_exercise">운동 선택</string>
 
+    <!-- SetWeightDialog.kt -->
+    <string name="set_weight">무게 설정</string>
+
+
 
     <!--item/ ===================================================================================-->
     <!--ItemWithRadioButton.kt-->

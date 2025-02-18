@@ -42,6 +42,7 @@ import androidx.compose.material.icons.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.material.icons.rounded.QrCode
+import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material.icons.rounded.Route
 import androidx.compose.material.icons.rounded.Schedule
 import androidx.compose.material.icons.rounded.Search
@@ -93,6 +94,9 @@ object IconTextButtonIcon {
 object IconButtonIcon {
     val stop = MyIcon(Icons.Rounded.Close,     34.dp, false, null, R.string.stop)
     val pause = MyIcon(Icons.Rounded.Pause,    30.dp, false, null, R.string.pause)
+
+    val minus = MyIcon(Icons.Rounded.Remove,   30.dp, false, null, R.string.minus)
+    val plus = MyIcon(Icons.Rounded.Add,       30.dp, false, null, R.string.plus)
 }
 
 object FabIcon {

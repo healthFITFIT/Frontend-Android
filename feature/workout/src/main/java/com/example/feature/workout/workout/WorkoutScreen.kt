@@ -25,6 +25,7 @@ import com.example.core.ui.designsystem.components.MyScaffold
 import com.example.core.ui.designsystem.components.utils.ClickableBox
 import com.example.core.ui.designsystem.components.utils.MySpacerColumn
 import com.example.core.ui.ui.dialog.SelectExerciseDialog
+import com.example.core.ui.ui.dialog.SetWeightDialog
 import com.example.feature.workout.workout.component.CameraCard
 import com.example.feature.workout.workout.component.PeriodTime
 import com.example.feature.workout.workout.component.WorkoutButtons
@@ -43,10 +44,13 @@ fun WorkoutRoute(
         cameraPreviewViewModel = cameraPreviewViewModel,
 
         showSelectExerciseDialog = workoutUiState.showSelectExerciseDialog,
+        showSetWeightDialog = workoutUiState.showSetWeightDialog,
 
         setShowSelectExerciseDialog = workoutViewModel::setShowSelectExerciseDialog,
+        setShowSetWeightDialog = workoutViewModel::setShowSetWeightDialog,
 
         setCurrentExercise = workoutViewModel::setExercise,
+        setCurrentWeight = workoutViewModel::setWeight,
 
         onClickPrevSet = workoutViewModel::setPrevSet,
         onClickNextSet = workoutViewModel::setNextSet,
@@ -62,10 +66,13 @@ private fun WorkoutScreen(
     cameraPreviewViewModel: CameraPreviewViewModel,
 
     showSelectExerciseDialog: Boolean,
+    showSetWeightDialog: Boolean,
 
     setShowSelectExerciseDialog: (Boolean) -> Unit,
+    setShowSetWeightDialog: (Boolean) -> Unit,
 
     setCurrentExercise: (exercise: Exercise) -> Unit,
+    setCurrentWeight: (weight: Float?) -> Unit,
 
     onClickPrevSet: () -> Unit = { },
     onClickNextSet: () -> Unit = { },
@@ -76,8 +83,7 @@ private fun WorkoutScreen(
     MyScaffold(
         modifier = Modifier
             .navigationBarsPadding()
-            .displayCutoutPadding()
-            .imePadding(),
+            .displayCutoutPadding(),
     ){ paddingValues ->
 
         //dialog
@@ -89,6 +95,17 @@ private fun WorkoutScreen(
                     setShowSelectExerciseDialog(false)
                 },
                 onDismissRequest = { setShowSelectExerciseDialog(false) }
+            )
+        }
+
+        if (showSetWeightDialog){
+            SetWeightDialog(
+                initialWeight = currentExerciseUiState.weight,
+                onOkClick = {it ->
+                    setCurrentWeight(it)
+                    setShowSetWeightDialog(false)
+                },
+                onDismissRequest = { setShowSetWeightDialog(false) }
             )
         }
 
@@ -121,7 +138,7 @@ private fun WorkoutScreen(
                 weight = currentExerciseUiState.weight,
                 onClickSets = { },
                 onClickReps = { },
-                onClickWeight = { }
+                onClickWeight = { setShowSetWeightDialog(true) }
             )
 
             MySpacerColumn(16.dp)
