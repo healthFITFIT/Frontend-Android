@@ -4,8 +4,19 @@
     <!-- AppIconWithAppNameCard.kt -->
 
 
+
+    <!--dialog/component/ =======================================================================-->
+    <!-- DialogButton.kt -->
+    <string name="button_cancel">취소</string>
+    <string name="button_ok">확인</string>
+
     <!--dialog/ =================================================================================-->
-    <!--DateRangeDialog.kt-->
+    <!-- SelectExerciseDialog.kt -->
+    <string name="select_exercise">운동 선택</string>
+
+    <!-- SetWeightDialog.kt -->
+    <string name="set_weight">무게 설정</string>
+
 
 
     <!--item/ ===================================================================================-->
@@ -24,5 +35,8 @@
     <!--InternetUnavailable.kt-->
     <string name="internet_unavailable_check_connection">인터넷 연결 없음\n인터넷 연결을 확인하세요.</string>
 
+    <!--SegmentedButtons.kt-->
+    <string name="_24h">24시간</string>
+    <string name="_12h">12시간</string>
 
 </resources>

@@ -24,7 +24,8 @@ internal fun ExerciseName(
 ){
     ClickableBox(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.large
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -33,6 +34,8 @@ internal fun ExerciseName(
                 .fillMaxWidth()
                 .padding(16.dp, 8.dp)
         ) {
+            MySpacerRow(30.dp)
+
             Text(
                 text = stringResource(exercise.textId),
                 style = MaterialTheme.typography.titleMedium

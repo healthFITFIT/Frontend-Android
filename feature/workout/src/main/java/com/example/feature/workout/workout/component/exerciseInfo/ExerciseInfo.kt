@@ -3,8 +3,6 @@ package com.example.feature.workout.workout.component.exerciseInfo
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
@@ -15,8 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.core.model.workout.Exercise
 import com.example.core.ui.designsystem.components.utils.MyCard
-import com.example.core.ui.designsystem.components.utils.MySpacerRow
-import com.example.core.utils.itemMaxWidthSmall
+import com.example.core.utils.itemMaxWidth
 
 @Composable
 internal fun ExerciseInfo(
@@ -29,7 +26,11 @@ internal fun ExerciseInfo(
     reps: Int,
     goalReps: Int,
 
-    weight: Float?
+    weight: Float?,
+
+    onClickSets: () -> Unit,
+    onClickReps: () -> Unit,
+    onClickWeight: () -> Unit
 ){
     val valueBigTextStyle = MaterialTheme.typography.displayLarge.copy(fontSize = 50.sp)
     val valueTextStyle = MaterialTheme.typography.displayLarge
@@ -37,11 +38,11 @@ internal fun ExerciseInfo(
 
 
     MyCard(
-        modifier = Modifier.widthIn(max = itemMaxWidthSmall),
+        modifier = Modifier.widthIn(max = itemMaxWidth),
         shape = MaterialTheme.shapes.extraLarge
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(8.dp)
         ) {
             ExerciseName(
                 exercise = exercise,
@@ -51,40 +52,35 @@ internal fun ExerciseInfo(
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Bottom,
-                modifier = Modifier.widthIn(max = itemMaxWidthSmall).height(92.dp)
+                modifier = Modifier
+                    .widthIn(max = itemMaxWidth)
             ) {
-                Spacer(modifier = Modifier.weight(0.5f))
-
                 Sets(
                     sets = sets,
                     goalSets = goalSets,
                     valueTextStyle = valueTextStyle,
-                    unitTextStyle = unitTextStyle
+                    unitTextStyle = unitTextStyle,
+                    onClick = onClickSets,
+                    modifier = Modifier.weight(0.3f)
                 )
-
-                MySpacerRow(8.dp)
-                Spacer(modifier = Modifier.weight(1f))
-
 
                 Reps(
                     reps = reps,
                     goalReps = goalReps,
                     valueBigTextStyle = valueBigTextStyle,
                     valueTextStyle = valueTextStyle,
-                    unitTextStyle = unitTextStyle
+                    unitTextStyle = unitTextStyle,
+                    onClick = onClickReps,
+                    modifier = Modifier.weight(0.4f)
                 )
-
-                MySpacerRow(8.dp)
-                Spacer(modifier = Modifier.weight(1f))
-
 
                 Weight(
                     weight = weight,
                     valueTextStyle = valueTextStyle,
-                    unitTextStyle = unitTextStyle
+                    unitTextStyle = unitTextStyle,
+                    onClick = onClickWeight,
+                    modifier = Modifier.weight(0.3f)
                 )
-
-                Spacer(modifier = Modifier.weight(0.5f))
             }
 
         }

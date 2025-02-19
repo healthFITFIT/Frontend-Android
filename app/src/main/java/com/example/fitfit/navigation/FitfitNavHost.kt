@@ -257,14 +257,12 @@ fun FitfitNavHost(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
-                navigateToSomeScreen = { }
             )
 
             setThemeScreen(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
-                navigateToSomeScreen = { }
             )
 
             aboutScreen(

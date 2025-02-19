@@ -67,7 +67,10 @@ fun NavGraphBuilder.mainLogsScreen(
                 MySpacerRow(width = NAVIGATION_DRAWER_BAR_WIDTH)
             }
 
-            MainLogsRoute()
+            MainLogsRoute(
+                use2Panes = externalState.windowSizeClass.use2Panes,
+                spacerValue = externalState.windowSizeClass.spacerValue
+            )
         }
     }
 }

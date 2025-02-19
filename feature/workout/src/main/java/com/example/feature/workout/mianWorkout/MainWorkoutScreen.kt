@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.core.ui.designsystem.components.MyScaffold
 import com.example.core.ui.designsystem.components.button.StartWorkoutButton
@@ -23,16 +24,22 @@ import com.example.feature.workout.R
 fun MainWorkoutRoute(
     navigateToWorkout: () -> Unit,
 
+    use2Panes: Boolean,
+    spacerValue: Dp,
+
     modifier: Modifier = Modifier,
 ) {
 
     MainWorkoutScreen(
+        spacerValue = spacerValue,
         navigateToWorkout = navigateToWorkout
     )
 }
 
 @Composable
 private fun MainWorkoutScreen(
+    spacerValue: Dp,
+
     navigateToWorkout: () -> Unit,
 ){
     MyScaffold(
@@ -44,7 +51,8 @@ private fun MainWorkoutScreen(
         //top app bar
         topBar = {
             FitfitTopAppBar(
-                title = stringResource(R.string.workout)
+                title = stringResource(R.string.workout),
+                startPadding = spacerValue
             )
         }
     ){ paddingValues ->
@@ -52,7 +60,7 @@ private fun MainWorkoutScreen(
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, 200.dp),
+            contentPadding = PaddingValues(spacerValue, 16.dp, spacerValue, 200.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)

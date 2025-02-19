@@ -56,6 +56,8 @@
     <!--IconTextButtonIcon-->
     <string name="stop">Stop</string>
     <string name="pause">Pause</string>
+    <string name="minus">Minus</string>
+    <string name="plus">Plus</string>
 
     <!--MyIcons-->
     <string name="error">Error</string>

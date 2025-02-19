@@ -72,6 +72,8 @@ fun NavGraphBuilder.mainMoreScreen(
             MainMoreRoute(
                 isDebugMode = BuildConfig.DEBUG,
                 appUserData = appUiState.appUserData,
+                use2Panes = externalState.windowSizeClass.use2Panes,
+                spacerValue = externalState.windowSizeClass.spacerValue,
                 navigateTo = navigateTo
             )
         }

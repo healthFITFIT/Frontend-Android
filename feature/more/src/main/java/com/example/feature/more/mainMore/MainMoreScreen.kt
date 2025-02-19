@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.core.model.data.UserData
 import com.example.core.model.enums.ScreenDestination
@@ -29,6 +30,8 @@ fun MainMoreRoute(
     isDebugMode: Boolean,
     appUserData: UserData?,
 
+    use2Panes: Boolean,
+    spacerValue: Dp,
     navigateTo: (ScreenDestination) -> Unit,
 
     modifier: Modifier = Modifier,
@@ -39,6 +42,8 @@ fun MainMoreRoute(
         isDebugMode = isDebugMode,
         appUserData = appUserData,
 
+        startSpacerValue = spacerValue,
+        endSpacerValue = if (use2Panes) spacerValue / 2 else spacerValue,
         navigateTo = navigateTo
     )
 }
@@ -48,6 +53,8 @@ private fun MainMoreScreen(
     isDebugMode: Boolean,
     appUserData: UserData?,
 
+    startSpacerValue: Dp,
+    endSpacerValue: Dp,
     navigateTo: (ScreenDestination) -> Unit,
 
     modifier: Modifier = Modifier,
@@ -55,12 +62,13 @@ private fun MainMoreScreen(
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
 
     MyScaffold(
-        modifier =modifier
+        modifier = modifier
             .fillMaxSize()
             .navigationBarsPadding(),
 
         topBar = {
             FitfitTopAppBar(
+                startPadding = startSpacerValue,
                 title = stringResource(R.string.more)
             )
         }
@@ -69,7 +77,7 @@ private fun MainMoreScreen(
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, 200.dp),
+            contentPadding = PaddingValues(startSpacerValue, 16.dp, endSpacerValue, 200.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)

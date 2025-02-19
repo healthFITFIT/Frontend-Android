@@ -19,13 +19,16 @@ data class CurrentExerciseUiState(
     val reps: Int = 0,
     val goalReps: Int = 15,
 
-    val weight: Float? = null,
+    val weight: Float? = 0.0f,
 )
 
 
 data class WorkoutUiState(
     val currentExerciseUiState: CurrentExerciseUiState = CurrentExerciseUiState(),
-    val workoutData: WorkoutData = WorkoutData()
+    val workoutData: WorkoutData = WorkoutData(),
+
+    val showSelectExerciseDialog: Boolean = false,
+    val showSetWeightDialog: Boolean = false
 )
 
 @HiltViewModel
@@ -46,12 +49,17 @@ class WorkoutViewModel @Inject constructor(
         }
     }
 
-    //TODO: create functions
-//    fun setPeriodTime(duration: Int) {
-//
-//    }
+    fun setWeight(weight: Float?) {
+        _workoutUiState.update {
+            it.copy(
+                currentExerciseUiState = it.currentExerciseUiState.copy(
+                    weight = weight
+                )
+            )
+        }
+    }
 
-    //temp
+    //temp----------------------------------
     fun setPrevSet() {
         _workoutUiState.update {
             it.copy(
@@ -101,6 +109,22 @@ class WorkoutViewModel @Inject constructor(
                     reps = 0,
                     exercise = Exercise.PUSH_UP
                 )
+            )
+        }
+    }
+
+    fun setShowSelectExerciseDialog(show: Boolean) {
+        _workoutUiState.update {
+            it.copy(
+                showSelectExerciseDialog = show
+            )
+        }
+    }
+
+    fun setShowSetWeightDialog(show: Boolean) {
+        _workoutUiState.update {
+            it.copy(
+                showSetWeightDialog = show
             )
         }
     }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.core.ui.designsystem.components.MyScaffold
 import com.example.core.ui.designsystem.components.topAppBar.FitfitTopAppBar
@@ -18,16 +19,20 @@ import com.example.feature.logs.R
 
 @Composable
 fun MainLogsRoute(
-    modifier: Modifier = Modifier,
+    use2Panes: Boolean,
+    spacerValue: Dp,
+    modifier: Modifier = Modifier
 ) {
 
 
-    MainLogsScreen()
+    MainLogsScreen(
+        spacerValue = spacerValue
+    )
 }
 
 @Composable
 private fun MainLogsScreen(
-
+    spacerValue: Dp,
 ){
     MyScaffold(
         modifier = Modifier,
@@ -42,7 +47,7 @@ private fun MainLogsScreen(
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, 200.dp),
+            contentPadding = PaddingValues(spacerValue, 16.dp, spacerValue, 200.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
