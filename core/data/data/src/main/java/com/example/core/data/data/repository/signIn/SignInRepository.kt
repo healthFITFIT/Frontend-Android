@@ -17,6 +17,7 @@ class SignInRepository @Inject constructor(
     //sign in ======================================================================================
     suspend fun signInWithGoogle(
         context: Context,
+        onResult: (userData: UserData) -> Unit,
         onError: () -> Unit
     ){
         //sign in -> get user idToken
@@ -27,9 +28,7 @@ class SignInRepository @Inject constructor(
 
                 dbRemoteDataSource.requestUserInfo(
                     userGoogleIdToken = userGoogleIdToken,
-                    onResult = { userData: UserData ->
-
-                    },
+                    onResult = onResult,
                     onError = onError
                 )
             },

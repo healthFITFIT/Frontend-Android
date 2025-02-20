@@ -65,6 +65,7 @@ class SignInViewModel @Inject constructor(
     //sign in ======================================================================================
     suspend fun signInWithGoogle(
         context: Context,
+        onResult: (userData: UserData) -> Unit,
         onError: () -> Unit
     ){
         //FIXME: when user cancel it, not to show error snack bar
@@ -72,6 +73,7 @@ class SignInViewModel @Inject constructor(
         setIsSigningIn(true)
         signInRepository.signInWithGoogle(
             context = context,
+            onResult = onResult,
             onError = {
                 setIsSigningIn(false)
                 onError()
