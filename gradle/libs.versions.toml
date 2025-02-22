@@ -54,6 +54,8 @@ serialization = "1.8.0"
 #15 camerax
 camerax= "1.5.0-alpha05"
 
+#16 google ml kit pose detection
+pose-detection= "18.0.0-beta5"
 
 
 
@@ -155,7 +157,8 @@ androidx-camera-video =       { group = "androidx.camera", name = "camera-video"
 androidx-camera-view =        { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
 androidx-camera-extentions =  { group = "androidx.camera", name = "camera-extensions", version.ref = "camerax" }
 
-
+#16 google ml kit pose detection
+mlkit-pose-detection =  { group = "com.google.mlkit", name = "pose-detection", version.ref = "pose-detection" }
 
 
 
