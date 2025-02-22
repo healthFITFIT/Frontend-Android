@@ -43,6 +43,7 @@ dependencies {
 
     //module
     implementation(project(":core:model"))
+//    implementation(project(":core:data:ai-pose-detection"))
     implementation(project(":core:ui:ui"))
     implementation(project(":core:utils"))
     implementation(project(":core:ui:designsystem"))
@@ -75,6 +76,9 @@ dependencies {
     implementation(libs.androidx.camera.video)
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.extentions)
+
+    //ml kit pose detection
+    implementation(libs.mlkit.pose.detection)
 
     //test
     testImplementation(libs.junit)

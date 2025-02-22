@@ -4,12 +4,15 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import androidx.camera.compose.CameraXViewfinder
+import androidx.camera.core.CameraSelector
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,9 +21,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -59,7 +66,8 @@ fun CameraCard(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .clip(MaterialTheme.shapes.extraLarge),
+            .clip(MaterialTheme.shapes.extraLarge)
+            .background(MaterialTheme.colorScheme.surfaceVariant),
         contentAlignment = Alignment.Center
     ) {
 
@@ -102,21 +110,54 @@ fun CameraPreviewContent(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
 ) {
     val surfaceRequest by cameraPreviewViewModel.surfaceRequest.collectAsStateWithLifecycle()
+    val poseLines by cameraPreviewViewModel.poseLines.collectAsStateWithLifecycle()
+
+    val cameraPreviewUiState by cameraPreviewViewModel.cameraPreviewUiState.collectAsStateWithLifecycle()
+    val cameraSelector = cameraPreviewUiState.cameraSelector
+
+    val imageWidth by cameraPreviewViewModel.imageWidth.collectAsStateWithLifecycle()
+    val imageHeight by cameraPreviewViewModel.imageHeight.collectAsStateWithLifecycle()
+
+    var boxWidth by remember { mutableStateOf(0) }
+    var boxHeight by remember { mutableStateOf(0) }
+
     val context = LocalContext.current
+
     LaunchedEffect(lifecycleOwner) {
         cameraPreviewViewModel.bindToCamera(context.applicationContext, lifecycleOwner)
     }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+//            .fillMaxSize()
+            //ratio to camera preview size / FIXME: if camera ratio different? like other device
+            .aspectRatio(3/4f),
         contentAlignment = Alignment.BottomStart
     ) {
         //camera preview
         surfaceRequest?.let { request ->
             CameraXViewfinder(
-                surfaceRequest = request
+                surfaceRequest = request,
+                modifier = Modifier
+                    //get size(pixel not dp) of camera preview ui
+                    .onGloballyPositioned {
+                        boxWidth = it.size.width
+                        boxHeight = it.size.height
+                    }
             )
         }
+
+        //pose overlay lines
+        PoseOverlay(
+            poseLines = poseLines,
+            isFlipped = cameraSelector == CameraSelector.DEFAULT_FRONT_CAMERA,
+
+            imageWidth = imageWidth,
+            imageHeight = imageHeight,
+
+            canvasWidth = boxWidth,
+            canvasHeight = boxHeight
+        )
 
         //flip camera button
         FlipCameraButton(
