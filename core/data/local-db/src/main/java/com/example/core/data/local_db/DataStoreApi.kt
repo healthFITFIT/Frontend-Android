@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.core.model.data.DateTimeFormat
 import com.example.core.model.data.Theme
 import com.example.core.model.enums.AppTheme
@@ -25,6 +26,8 @@ class DataStoreApi @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ): DbLocalDataSource {
     private companion object {
+        val JWT_SECURED = stringPreferencesKey("jwt_secured")
+
         val APP_THEME = intPreferencesKey("app_theme")
 
         val DATE_FORMAT = intPreferencesKey("date_format")
@@ -32,6 +35,19 @@ class DataStoreApi @Inject constructor(
         val DATE_INCLUDE_DAY_OF_WEEK = booleanPreferencesKey("date_include_day_of_week")
         val TIME_FORMAT = intPreferencesKey("time_format")
     }
+
+    private val jwtSecured: Flow<String> = dataStore.data
+        .catch {
+            if (it is IOException) {
+                Log.e(DATA_STORE_TAG, "Error reading preferences.", it)
+                emit(emptyPreferences())
+            } else {
+                throw it
+            }
+        }
+        .map { preferences ->
+            preferences[JWT_SECURED] ?: ""
+        }
 
     private val appTheme: Flow<Int> = dataStore.data
         .catch {
@@ -114,6 +130,22 @@ class DataStoreApi @Inject constructor(
 
 
 
+    //get
+    override suspend fun getJwtPreference(
+        onGet: (jwtOriginal: String?) -> Unit
+    ){
+        val jwtSecured = jwtSecured.firstOrNull()
+
+        if (jwtSecured == null || jwtSecured == ""){
+            onGet(null)
+        }
+        else {
+            //decrypt jwtSecured string
+            val (iv, encryptedData) = JwtSecure.decodeIvAndData(jwtSecured)
+            val decryptedData = SecurityUtil.decryptData(BuildConfig.JWT_KEY_ALIAS, iv, encryptedData)
+            onGet(decryptedData)
+        }
+    }
 
     override suspend fun getAppPreferencesValue(
         onGet: (Theme, DateTimeFormat) -> Unit
@@ -135,6 +167,29 @@ class DataStoreApi @Inject constructor(
         )
     }
 
+
+
+
+    //save
+    override suspend fun saveJwtPreference(
+        jwtOriginal: String?
+    ){
+        dataStore.edit { preferences ->
+
+            if (jwtOriginal == null){
+                preferences[JWT_SECURED] = ""
+                Log.d(DATA_STORE_TAG, "jwt original: null")
+            }
+            else {
+                //encrypt jwt string
+                val (iv, secureByteArray) = SecurityUtil.encryptData(BuildConfig.JWT_KEY_ALIAS, jwtOriginal)
+                val jwtSecured = JwtSecure.encodeIvAndData(iv, secureByteArray)
+                preferences[JWT_SECURED] = jwtSecured
+
+                Log.d(DATA_STORE_TAG, "jwt original: $jwtOriginal / jwt secured: $jwtSecured")
+            }
+        }
+    }
 
     override suspend fun saveAppThemePreference(appTheme: AppTheme) {
         dataStore.edit { preferences ->

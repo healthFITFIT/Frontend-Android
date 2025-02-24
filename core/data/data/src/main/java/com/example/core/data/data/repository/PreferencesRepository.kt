@@ -11,6 +11,12 @@ import javax.inject.Inject
 class PreferencesRepository @Inject constructor(
     private val dbLocalDataSource: DbLocalDataSource
 ) {
+    suspend fun getJwtPreference(
+        onGet: (jwtOriginal: String?) -> Unit
+    ){
+        dbLocalDataSource.getJwtPreference(onGet = onGet)
+    }
+
     suspend fun getAppPreferencesValue(
         onGet: (Theme, DateTimeFormat) -> Unit
     ) {
@@ -19,7 +25,11 @@ class PreferencesRepository @Inject constructor(
 
 
 
-
+    suspend fun saveJwtPreference(
+        jwtOriginal: String?
+    ){
+        dbLocalDataSource.saveJwtPreference(jwtOriginal = jwtOriginal)
+    }
 
     suspend fun saveAppThemePreference(
         appTheme: AppTheme

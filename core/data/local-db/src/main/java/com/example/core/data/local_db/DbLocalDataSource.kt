@@ -11,16 +11,20 @@ interface DbLocalDataSource {
     /**
      * update app setting values - at app start
      */
+    suspend fun getJwtPreference(
+        onGet: (jwtOriginal: String?) -> Unit
+    )
+
     suspend fun getAppPreferencesValue(
         onGet: (Theme, DateTimeFormat) -> Unit
     )
 
 
 
+    suspend fun saveJwtPreference(jwtOriginal: String?)
+
 
     suspend fun saveAppThemePreference(appTheme: AppTheme)
-
-
 
     suspend fun saveDateFormatPreference(dateFormat: DateFormat)
 
