@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.data.settings"
+    namespace = "com.example.core.data.local_db"
     compileSdk = 35
 
     defaultConfig {

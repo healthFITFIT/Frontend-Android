@@ -1,4 +1,4 @@
-package com.example.core.data.settings
+package com.example.core.data.local_db
 
 import android.util.Log
 import androidx.datastore.core.DataStore
@@ -23,7 +23,7 @@ private const val DATA_STORE_TAG = "DataStore"
 
 class DataStoreApi @Inject constructor(
     private val dataStore: DataStore<Preferences>
-): SettingsLocalDataSource {
+): DbLocalDataSource {
     private companion object {
         val APP_THEME = intPreferencesKey("app_theme")
 

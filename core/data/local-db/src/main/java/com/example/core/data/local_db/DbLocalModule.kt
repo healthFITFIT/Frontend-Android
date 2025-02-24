@@ -1,4 +1,4 @@
-package com.example.core.data.settings
+package com.example.core.data.local_db
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -15,11 +15,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class SettingsLocalModule {
+abstract class DbLocalModule {
     @Binds
-    internal abstract fun bindSettingDataSource(
+    internal abstract fun bindDataSource(
         settingDataStoreApi: DataStoreApi
-    ): SettingsLocalDataSource
+    ): DbLocalDataSource
 }
 
 @Module

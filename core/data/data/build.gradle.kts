@@ -40,7 +40,7 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(project(":core:data:credentials"))
-    implementation(project(":core:data:settings"))
+    implementation(project(":core:data:local-db"))
     implementation(project(":core:data:remote-db"))
 
     //

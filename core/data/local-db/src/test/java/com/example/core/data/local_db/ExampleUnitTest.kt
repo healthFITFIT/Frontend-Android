@@ -1,4 +1,4 @@
-package com.example.core.data.settings
+package com.example.core.data.local_db
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
