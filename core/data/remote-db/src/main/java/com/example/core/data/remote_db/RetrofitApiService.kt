@@ -1,22 +1,30 @@
 package com.example.core.data.remote_db
 
 import com.example.core.model.data.UserData
+import com.example.core.model.dto.ApiResponse
+import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface RetrofitApiService {
 
-    @POST("auth/google/login")
-    fun requestUserInfo(
-        userGoogleIdToken: String
-    ): UserData
+    @POST("oauth/validate")
+    suspend fun requestUserDataWithIdToken(
+        @Body idToken: String
+    ): Response<ApiResponse>
+
+
 
 
     @POST("")
-    fun getJwt(
-        userGoogleIdToken: String
-    ): String
+    fun requestUserDataWithJwt(
+        @Header("Authorization") jwt: String,
+    ): Response<ApiResponse>
+
+
+
 
 
     @POST("")
