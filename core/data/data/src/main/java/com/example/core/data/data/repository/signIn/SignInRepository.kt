@@ -20,7 +20,19 @@ class SignInRepository @Inject constructor(
         //sign in -> get user idToken
         val idToken = authRemoteDataSource.signinWithGoogle(context = context)
 
+        return if (idToken == null){
+                null
+            } else {
+                //send user idToken to backend -> get user data
+                dbRemoteDataSource.requestUserDataWithIdToken(userGoogleIdToken = idToken)
+            }
     }
+
+
+
+
+
+
 
 
 //    suspend fun signInLaunchGoogleLauncher(

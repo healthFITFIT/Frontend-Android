@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.data.data.repository.PreferencesRepository
-import com.example.core.data.data.repository.signIn.SignInRepository
+import com.example.core.data.data.repository.SplashRepository
 import com.example.core.model.data.DateTimeFormat
 import com.example.core.model.data.Theme
 import com.example.core.model.data.UserData
@@ -46,8 +46,11 @@ data class AppUiState(
 @HiltViewModel
 class AppViewModel @Inject constructor(
     private val preferencesRepository: PreferencesRepository,
-    private val signInRepository: SignInRepository,
+    private val splashRepository: SplashRepository,
 ): ViewModel() {
+    private val _jwt = MutableStateFlow(null as String?)
+    private val jwt = _jwt.asStateFlow()
+
     private val _appUiState = MutableStateFlow(AppUiState())
     val appUiState = _appUiState.asStateFlow()
 
@@ -60,6 +63,8 @@ class AppViewModel @Inject constructor(
     }
 
     suspend fun getAppPreferencesValue(){
+
+        //get app preferences from local db
         preferencesRepository.getAppPreferencesValue { theme, dateTimeFormat ->
             _appUiState.update {
                 it.copy(
@@ -134,18 +139,51 @@ class AppViewModel @Inject constructor(
     ){
         Log.d("MainActivity1", "[2] initSignedInUser start")
 
+
         viewModelScope.launch {
 //            val time = measureNanoTime {
 //            val userData = userRepository.getSignedInUser()
             var userData: UserData? = UserData("test", "", "", "", emptyList()) //TODO: delete this and use upper code
 //            userData = null
 
-            _appUiState.update {
-                it.copy(appUserData = userData)
+
+            //send jwt to server, get user data
+
+            //get jwt from local db
+            preferencesRepository.getJwtPreference { jwt ->
+                _jwt.update { jwt }
             }
 
-            onDone(userData == null || userData.userId == "")
-            Log.d("MainActivity1", "[2] initSignedInUser - user: ${userData?.userId}")
+            val jwt = jwt.value
+            var newUserData: UserData? = null
+
+            if (jwt == null || jwt == ""){
+                newUserData = null
+            }
+            else {
+                //gwt user data with jwt
+                val jwtAndUserData = splashRepository.getUserData(jwt = jwt)
+
+                if (jwtAndUserData == null){
+                    preferencesRepository.saveJwtPreference(null)
+                    newUserData = null
+                }
+                else {
+                    val (newJwt, newUserData1) = jwtAndUserData
+                    preferencesRepository.saveJwtPreference(newJwt)
+                    _jwt.update { newJwt }
+                    newUserData = newUserData1
+                }
+            }
+
+
+            _appUiState.update {
+                it.copy(appUserData = newUserData)
+            }
+
+            onDone(newUserData == null || newUserData.userId == "")
+
+            Log.d("MainActivity1", "[2] initSignedInUser - user: ${newUserData?.userId}")
 //            }
 //            Log.d("MainActivity1", "[2] ${time*0.000000001} - initSignedInUser")
         }
