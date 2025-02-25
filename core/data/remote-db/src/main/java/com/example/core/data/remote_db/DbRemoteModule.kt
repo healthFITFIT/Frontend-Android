@@ -25,7 +25,7 @@ abstract class DbRemoteModule {
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
-    private const val BASE_URL = "http://13.124.103.84:8080/"
+    private const val BASE_URL = "https://health-fitfit.kro.kr/"
     private val moshi: Moshi = Moshi
         .Builder()
         .add(KotlinJsonAdapterFactory())
