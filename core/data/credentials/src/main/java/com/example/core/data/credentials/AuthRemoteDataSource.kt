@@ -9,11 +9,16 @@ import com.example.core.model.enums.ProviderId
 interface AuthRemoteDataSource{
 //    fun getCurrentUser(): FirebaseUser?
 
+    /**
+     * sign in with google,
+     * and get idToken
+     *
+     * @param context
+     * @return idToken or null(error)
+     */
     suspend fun signinWithGoogle(
         context: Context,
-        onResult: (String) -> Unit,
-        onError: () -> Unit
-    )
+    ): String?
 
     suspend fun signInWithGoogleIntent(
         intent: Intent,

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.core.data.data.repository.CommonUiState
 import com.example.core.data.data.repository.CommonUiStateRepository
+import com.example.core.data.data.repository.PreferencesRepository
 import com.example.core.data.data.repository.signIn.SignInRepository
 import com.example.core.model.data.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,6 +24,7 @@ data class SignInUiState(
 class SignInViewModel @Inject constructor(
     private val commonUiStateRepository: CommonUiStateRepository,
     private val signInRepository: SignInRepository,
+    private val preferencesRepository: PreferencesRepository,
 ): ViewModel() {
     private val _signInUiState: MutableStateFlow<SignInUiState> =
         MutableStateFlow(SignInUiState())
@@ -71,15 +73,25 @@ class SignInViewModel @Inject constructor(
         //FIXME: when user cancel it, not to show error snack bar
 
         setIsSigningIn(true)
-        signInRepository.signInWithGoogle(
-            context = context,
-            onResult = onResult,
-            onError = {
-                setIsSigningIn(false)
-                onError()
-            }
-        )
+
+        val jwtAndUserData = signInRepository.signInWithGoogle(context = context)
+
+        if (jwtAndUserData == null){
+            setIsSigningIn(false)
+            onError()
+        }
+        else {
+            val (jwt, userData) = jwtAndUserData
+            preferencesRepository.saveJwtPreference(jwt)
+            onResult(userData)
+        }
     }
+
+
+
+
+
+
 
 //    suspend fun signInLaunchGoogleLauncher(
 //        launcher: ManagedActivityResultLauncher<IntentSenderRequest, ActivityResult>,
