@@ -2,6 +2,7 @@ package com.example.core.data.remote_db
 
 import android.util.Log
 import com.example.core.model.data.UserData
+import com.example.core.model.dto.IdTokenRequest
 import javax.inject.Inject
 
 private const val RETROFIT_TAG = "Retrofit"
@@ -14,7 +15,9 @@ class RetrofitApi @Inject constructor(
         userGoogleIdToken: String,
     ): Pair<String, UserData>? {
         try {
-            val result = retrofitApiService.requestUserDataWithIdToken(idToken = userGoogleIdToken)
+            val result = retrofitApiService.requestUserDataWithIdToken(
+                idTokenRequest = IdTokenRequest(idToken = userGoogleIdToken)
+            )
             Log.d(RETROFIT_TAG, "result = $result")
             Log.d(RETROFIT_TAG, "headers = ${result.headers()}")
             Log.d(RETROFIT_TAG, "body = ${result.body()}")

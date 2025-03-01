@@ -2,8 +2,9 @@ package com.example.core.model.dto
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-
 @JsonClass(generateAdapter = true)
+
+//for oauth/validate
 data class ApiResponseDto(
     @Json(name = "success")     val success: Boolean,
     @Json(name = "jwt")         val jwt: String?,
