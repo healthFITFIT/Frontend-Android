@@ -39,8 +39,9 @@ dependencies {
     //module
     implementation(project(":core:model"))
 
+    implementation(project(":core:data:ai-pose-detection"))
     implementation(project(":core:data:credentials"))
-    implementation(project(":core:data:settings"))
+    implementation(project(":core:data:local-db"))
     implementation(project(":core:data:remote-db"))
 
     //
@@ -52,6 +53,9 @@ dependencies {
     //hilt
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
+
+    //ml kit pose detection
+    implementation(libs.mlkit.pose.detection)
 
     //test
     testImplementation(libs.junit)

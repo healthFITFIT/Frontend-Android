@@ -34,9 +34,16 @@ android {
 
 dependencies {
 
+    //moshi
+    implementation(libs.squareup.converter.moshi)
+
+
+    //
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.android.material)
+
+    //test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
