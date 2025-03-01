@@ -7,11 +7,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import com.example.core.model.data.Offset3D
+import com.example.core.model.data.MyPointF3D
 
 @Composable
 fun PoseOverlay(
-    poseLines: List<Triple<Offset3D, Offset3D, Color>>,
+    poseLines: List<Triple<MyPointF3D, MyPointF3D, Color>>,
     isFlipped: Boolean,
 
     imageWidth: Int, //scan? image width
@@ -28,8 +28,8 @@ fun PoseOverlay(
         if (isFlipped) {
             poseLines.map {
                 Triple(
-                    Offset3D(480 - it.first.x, it.first.y, it.first.z),
-                    Offset3D(480 - it.second.x, it.second.y, it.second.z),
+                    MyPointF3D(480 - it.first.x, it.first.y, it.first.z),
+                    MyPointF3D(480 - it.second.x, it.second.y, it.second.z),
                     it.third
                 )
             }
@@ -46,12 +46,12 @@ fun PoseOverlay(
     //scale to canvas size / z (-1 ~ 1)
     val newPoseLines = flippedPoseLines.map {
         Triple(
-            Offset3D(
+            MyPointF3D(
                 it.first.x * scale,
                 it.first.y * scale,
                 (it.first.z / maxDepth).coerceIn(-1f, 1f)
             ),
-            Offset3D(
+            MyPointF3D(
                 it.second.x * scale,
                 it.second.y * scale,
                 (it.second.z / maxDepth).coerceIn(-1f, 1f)

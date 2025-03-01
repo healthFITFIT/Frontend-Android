@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.example.core.data.data.repository.WorkoutRepository
-import com.example.core.model.data.Offset3D
+import com.example.core.model.data.MyPointF3D
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,7 +47,7 @@ class CameraPreviewViewModel @Inject constructor(
 
 
     //pose lines
-    private val _poseLines = MutableStateFlow<List<Triple<Offset3D, Offset3D, Color>>>(emptyList())
+    private val _poseLines = MutableStateFlow<List<Triple<MyPointF3D, MyPointF3D, Color>>>(emptyList())
     val poseLines = _poseLines.asStateFlow()
 
     private var processCameraProvider: ProcessCameraProvider? = null
@@ -146,13 +146,13 @@ class CameraPreviewViewModel @Inject constructor(
     }
 
     fun updatePoseLandmarks(
-        landmarks: Map<Int, Offset3D>
+        landmarks: Map<Int, MyPointF3D>
     ) {
         workoutRepository.updatePoseLandmarks(landmarks)
     }
 
     fun updatePoseLines(
-        poseLines: List<Triple<Offset3D, Offset3D, Color>>
+        poseLines: List<Triple<MyPointF3D, MyPointF3D, Color>>
     ) {
         _poseLines.update { poseLines }
     }

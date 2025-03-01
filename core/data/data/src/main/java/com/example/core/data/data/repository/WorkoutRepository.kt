@@ -1,7 +1,7 @@
 package com.example.core.data.data.repository
 
 import com.example.core.data.ai_pose_detection.AiPoseDetectionDataSource
-import com.example.core.model.data.Offset3D
+import com.example.core.model.data.MyPointF3D
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -13,11 +13,11 @@ class WorkoutRepository @Inject constructor(
     private val aiPoseDetectionDataSource: AiPoseDetectionDataSource
 ) {
 
-    private val _poseLandmarks = MutableStateFlow<Map<Int, Offset3D>>(emptyMap())
+    private val _poseLandmarks = MutableStateFlow<Map<Int, MyPointF3D>>(emptyMap())
     val poseLandmarks = _poseLandmarks.asStateFlow()
 
 
-    fun updatePoseLandmarks(poseLandmarks: Map<Int, Offset3D>) {
+    fun updatePoseLandmarks(poseLandmarks: Map<Int, MyPointF3D>) {
         _poseLandmarks.update { poseLandmarks }
     }
 
@@ -25,7 +25,7 @@ class WorkoutRepository @Inject constructor(
 
 
     fun pushUpAutoCount(
-        poseLandmarks: Map<Int, Offset3D>,
+        poseLandmarks: Map<Int, MyPointF3D>,
         onPlusReps: () -> Unit
     ){
         aiPoseDetectionDataSource.pushUpAutoCount(
