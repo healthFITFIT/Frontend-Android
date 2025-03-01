@@ -12,6 +12,7 @@ import androidx.camera.lifecycle.awaitInstance
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
+import com.example.core.data.data.repository.WorkoutRepository
 import com.example.core.model.data.Offset3D
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.awaitCancellation
@@ -22,12 +23,12 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 data class CameraPreviewUiState(
-    val cameraSelector: CameraSelector = DEFAULT_BACK_CAMERA
+    val cameraSelector: CameraSelector = DEFAULT_FRONT_CAMERA
 )
 
 @HiltViewModel
 class CameraPreviewViewModel @Inject constructor(
-
+    private val workoutRepository: WorkoutRepository
 ): ViewModel() {
     private val _cameraPreviewUiState = MutableStateFlow(CameraPreviewUiState())
     val cameraPreviewUiState = _cameraPreviewUiState.asStateFlow()
@@ -37,7 +38,22 @@ class CameraPreviewViewModel @Inject constructor(
     private val _surfaceRequest = MutableStateFlow<SurfaceRequest?>(null)
     val surfaceRequest: StateFlow<SurfaceRequest?> = _surfaceRequest
 
+    //image resolution
+    private val _imageWidth = MutableStateFlow(0)
+    val imageWidth = _imageWidth.asStateFlow()
+
+    private val _imageHeight = MutableStateFlow(0)
+    val imageHeight = _imageHeight.asStateFlow()
+
+
+    //pose lines
+    private val _poseLines = MutableStateFlow<List<Triple<Offset3D, Offset3D, Color>>>(emptyList())
+    val poseLines = _poseLines.asStateFlow()
+
     private var processCameraProvider: ProcessCameraProvider? = null
+
+
+
 
     private val cameraPreviewUseCase = Preview.Builder().build().apply {
         setSurfaceProvider { newSurfaceRequest ->
@@ -46,26 +62,19 @@ class CameraPreviewViewModel @Inject constructor(
     }
 
     private val imageAnalysisUseCase = ImageAnalysis.Builder()
-    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-    .build()
-    .apply {
-        setAnalyzer(
-            Runnable::run,
-            ImageAnalyzer(this@CameraPreviewViewModel)
-        )
-    }
+        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+        .build()
+        .apply {
+            setAnalyzer(
+                Runnable::run,
+                ImageAnalyzer(
+                    cameraPreviewViewModel = this@CameraPreviewViewModel,
+                )
+            )
+        }
 
 
-    //image resolution
-    private val _imageWidth = MutableStateFlow(0)
-    val imageWidth = _imageWidth.asStateFlow()
 
-    private val _imageHeight = MutableStateFlow(0)
-    val imageHeight = _imageHeight.asStateFlow()
-
-    //pose lines
-    private val _poseLines = MutableStateFlow<List<Triple<Offset3D, Offset3D, Color>>>(emptyList())
-    val poseLines = _poseLines.asStateFlow()
 
 
 
@@ -132,13 +141,19 @@ class CameraPreviewViewModel @Inject constructor(
         width: Int,
         height: Int
     ) {
-        _imageWidth.value = width
-        _imageHeight.value = height
+        _imageWidth.update { width }
+        _imageHeight.update { height }
+    }
+
+    fun updatePoseLandmarks(
+        landmarks: Map<Int, Offset3D>
+    ) {
+        workoutRepository.updatePoseLandmarks(landmarks)
     }
 
     fun updatePoseLines(
-        lines: List<Triple<Offset3D, Offset3D, Color>>
+        poseLines: List<Triple<Offset3D, Offset3D, Color>>
     ) {
-        _poseLines.value = lines
+        _poseLines.update { poseLines }
     }
 }

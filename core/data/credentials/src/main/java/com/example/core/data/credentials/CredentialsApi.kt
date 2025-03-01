@@ -23,9 +23,7 @@ class CredentialsApi @Inject constructor(
 
     override suspend fun signinWithGoogle(
         context: Context, //activity based context
-        onResult: (String) -> Unit,
-        onError: () -> Unit
-    ) {
+    ): String? {
         val credentialManager = CredentialManager.create(context)
 
         val signInWithGoogleOption: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder(
@@ -42,32 +40,38 @@ class CredentialsApi @Inject constructor(
                 request = request,
                 context = context
             )
-
             val userGoogleIdToken = handleSignInWithGoogle(result)
-            onResult(userGoogleIdToken)
+
+            return userGoogleIdToken
+
         } catch (e: GetCredentialException) {
             Log.d(CREDENTIALS_TAG, "error : $e")
-            onError()
+            return null
         }
     }
 
     private fun handleSignInWithGoogle(
         result: GetCredentialResponse
-    ): String {
+    ): String? {
         when (val credential = result.credential) {
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                     val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
                     val idToken = googleIdTokenCredential.idToken
 
-                    Log.d(CREDENTIALS_TAG, "user Google idToken: $idToken")
+//                    Log.d(CREDENTIALS_TAG, "user Google idToken: $idToken")
                     return idToken
                 }
             }
         }
         //FIXME ???????????
-        return ""
+        return null
     }
+
+
+
+
+
 
     override suspend fun signInWithGoogleIntent(intent: Intent): UserData? {
         TODO("Not yet implemented")

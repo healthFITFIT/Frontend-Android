@@ -7,7 +7,6 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.compose.ui.graphics.Color
 import com.example.core.model.data.Offset3D
-import com.google.android.gms.tasks.Task
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseDetection
@@ -26,7 +25,7 @@ val poseDetector = PoseDetection.getClient(options)
 
 
 class ImageAnalyzer(
-    private val cameraPreviewViewModel: CameraPreviewViewModel
+    private val cameraPreviewViewModel: CameraPreviewViewModel,
 ) : ImageAnalysis.Analyzer {
 
     @OptIn(ExperimentalGetImage::class)
@@ -35,11 +34,16 @@ class ImageAnalyzer(
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
             // Pass image to an ML Kit Vision API
-            val result: Task<Pose> = poseDetector.process(image)
+            poseDetector.process(image)
                 .addOnSuccessListener { results ->
+                    val poseLandmarks = extractPoseLandmarks(results)
                     val poseLines = extractPoseLines(results)
 
                     cameraPreviewViewModel.updateImageResolution(image.width, image.height)
+
+                    //update pose landmarks
+                    cameraPreviewViewModel.updatePoseLandmarks(poseLandmarks)
+
                     //update pose lines to cameraViewModel
                     cameraPreviewViewModel.updatePoseLines(poseLines)
                 }
@@ -56,14 +60,23 @@ class ImageAnalyzer(
     }
 
 
+
+
+
+
+    private fun extractPoseLandmarks(
+        pose: Pose
+    ): Map<Int, Offset3D> {
+        return pose.allPoseLandmarks.associateBy { it.landmarkType }
+            .filterValues { it != null }       //remove null
+            .mapValues { it.value.toOffset() } //convert to Offset3D
+    }
+
+
     private fun extractPoseLines(
         pose: Pose
     ): List<Triple<Offset3D, Offset3D, Color>> {
         val landmarks = pose.allPoseLandmarks.associateBy { it.landmarkType }
-
-//        val ori = landmarks[PoseLandmark.RIGHT_WRIST]?.toOffset()?.z
-//        val z = (ori?.div(1000))?.coerceIn(-1f, 1f)
-//        Log.d("pose", "ori: ${ori.toString().take(5)}, z: ${z.toString().take(5)}")
 
         return listOf(
 

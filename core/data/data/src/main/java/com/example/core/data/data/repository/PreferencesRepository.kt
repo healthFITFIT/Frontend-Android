@@ -1,6 +1,6 @@
 package com.example.core.data.data.repository
 
-import com.example.core.data.settings.SettingsLocalDataSource
+import com.example.core.data.local_db.DbLocalDataSource
 import com.example.core.model.data.DateTimeFormat
 import com.example.core.model.data.Theme
 import com.example.core.model.enums.AppTheme
@@ -9,46 +9,56 @@ import com.example.core.model.enums.TimeFormat
 import javax.inject.Inject
 
 class PreferencesRepository @Inject constructor(
-    private val settingsLocalDataSource: SettingsLocalDataSource
+    private val dbLocalDataSource: DbLocalDataSource
 ) {
+    suspend fun getJwtPreference(
+        onGet: (jwtOriginal: String?) -> Unit
+    ){
+        dbLocalDataSource.getJwtPreference(onGet = onGet)
+    }
+
     suspend fun getAppPreferencesValue(
         onGet: (Theme, DateTimeFormat) -> Unit
     ) {
-        settingsLocalDataSource.getAppPreferencesValue(onGet = onGet)
+        dbLocalDataSource.getAppPreferencesValue(onGet = onGet)
     }
 
 
 
-
+    suspend fun saveJwtPreference(
+        jwtOriginal: String?
+    ){
+        dbLocalDataSource.saveJwtPreference(jwtOriginal = jwtOriginal)
+    }
 
     suspend fun saveAppThemePreference(
         appTheme: AppTheme
     ) {
-        settingsLocalDataSource.saveAppThemePreference(appTheme = appTheme)
+        dbLocalDataSource.saveAppThemePreference(appTheme = appTheme)
     }
 
     suspend fun saveDateFormatPreference(
         dateFormat: DateFormat
     ) {
-        settingsLocalDataSource.saveDateFormatPreference(dateFormat = dateFormat)
+        dbLocalDataSource.saveDateFormatPreference(dateFormat = dateFormat)
     }
 
     suspend fun saveDateUseMonthNamePreference(
         useMonthName: Boolean
     ) {
-        settingsLocalDataSource.saveDateUseMonthNamePreference(useMonthName = useMonthName)
+        dbLocalDataSource.saveDateUseMonthNamePreference(useMonthName = useMonthName)
     }
 
     suspend fun saveDateIncludeDayOfWeekPreference(
         includeDayOfWeek: Boolean
     ) {
-        settingsLocalDataSource.saveDateIncludeDayOfWeekPreference(includeDayOfWeek = includeDayOfWeek)
+        dbLocalDataSource.saveDateIncludeDayOfWeekPreference(includeDayOfWeek = includeDayOfWeek)
     }
 
     suspend fun saveTimeFormatPreference(
         timeFormat: TimeFormat
     ) {
-        settingsLocalDataSource.saveTimeFormatPreference(timeFormat = timeFormat)
+        dbLocalDataSource.saveTimeFormatPreference(timeFormat = timeFormat)
     }
 
 }
