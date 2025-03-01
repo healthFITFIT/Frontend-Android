@@ -1,12 +1,16 @@
 package com.example.feature.workout.workout
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.core.data.data.repository.WorkoutRepository
 import com.example.core.model.workout.Exercise
 import com.example.core.model.workout.WorkoutData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class CurrentExerciseUiState(
@@ -33,10 +37,27 @@ data class WorkoutUiState(
 
 @HiltViewModel
 class WorkoutViewModel @Inject constructor(
-
+    private val workoutRepository: WorkoutRepository
 ) : ViewModel() {
     private val _workoutUiState = MutableStateFlow(WorkoutUiState())
     val workoutUiState = _workoutUiState.asStateFlow()
+
+
+
+    init {
+        viewModelScope.launch {
+            workoutRepository.poseLandmarks.collect{ poseLandmarks ->
+                workoutRepository.pushUpAutoCount(
+                    poseLandmarks = poseLandmarks,
+                    onPlusReps = {
+                        setPlusReps()
+                        Log.d("posee", ">>> reps: ${workoutUiState.value.currentExerciseUiState.reps}")
+                    }
+                )
+            }
+        }
+    }
+
 
 
     fun setExercise(exercise: Exercise) {
@@ -58,6 +79,11 @@ class WorkoutViewModel @Inject constructor(
             )
         }
     }
+
+
+
+
+
 
     //temp----------------------------------
     fun setPrevSet() {

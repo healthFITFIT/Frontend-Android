@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.data.data"
+    namespace = "com.example.core.data.ai_pose_dectection"
     compileSdk = 35
 
     defaultConfig {
@@ -36,19 +36,8 @@ android {
 
 dependencies {
 
-    //module
+    //modules
     implementation(project(":core:model"))
-
-    implementation(project(":core:data:ai-pose-detection"))
-    implementation(project(":core:data:credentials"))
-    implementation(project(":core:data:settings"))
-    implementation(project(":core:data:remote-db"))
-
-    //
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.android.material)
 
     //hilt
     implementation(libs.dagger.hilt.android)
@@ -56,6 +45,14 @@ dependencies {
 
     //ml kit pose detection
     implementation(libs.mlkit.pose.detection)
+
+    //camera
+    implementation(libs.androidx.camera.core)
+
+    //
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.android.material)
 
     //test
     testImplementation(libs.junit)
