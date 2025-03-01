@@ -49,22 +49,6 @@ fun NavGraphBuilder.workoutScreen(
 
         val appUiState by appViewModel.appUiState.collectAsState()
 
-        val widthSizeClass = externalState.windowSizeClass.widthSizeClass
-        val heightSizeClass = externalState.windowSizeClass.heightSizeClass
-
-        Row {
-            if (widthSizeClass == WindowWidthSizeClass.Compact) {
-                MySpacerRow(width = 0.dp)
-            } else if (
-                heightSizeClass == WindowHeightSizeClass.Compact
-                || widthSizeClass == WindowWidthSizeClass.Medium
-            ) {
-                MySpacerRow(width = NAVIGATION_RAIL_BAR_WIDTH)
-            } else if (widthSizeClass == WindowWidthSizeClass.Expanded) {
-                MySpacerRow(width = NAVIGATION_DRAWER_BAR_WIDTH)
-            }
-
-            WorkoutRoute()
-        }
+        WorkoutRoute()
     }
 }
