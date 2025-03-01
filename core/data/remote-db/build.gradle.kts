@@ -54,9 +54,7 @@ dependencies {
     //retrofit
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.converter.moshi)
-
-    //serialization
-    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.squareup.moshi.kotlin)
 
     //test
     testImplementation(libs.junit)

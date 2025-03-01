@@ -1,7 +1,6 @@
 package com.example.core.data.data.repository.signIn
 
 import android.content.Context
-import android.util.Log
 import com.example.core.data.credentials.AuthRemoteDataSource
 import com.example.core.data.remote_db.DbRemoteDataSource
 import com.example.core.model.data.UserData
@@ -17,28 +16,23 @@ class SignInRepository @Inject constructor(
     //sign in ======================================================================================
     suspend fun signInWithGoogle(
         context: Context,
-        onError: () -> Unit
-    ){
+    ): Pair<String, UserData>? {
         //sign in -> get user idToken
-        authRemoteDataSource.signinWithGoogle(
-            context = context,
-            onResult = { userGoogleIdToken ->
-                Log.d(USER_REPOSITORY_TAG, "user idToken: $userGoogleIdToken")
+        val idToken = authRemoteDataSource.signinWithGoogle(context = context)
 
-                dbRemoteDataSource.requestUserInfo(
-                    userGoogleIdToken = userGoogleIdToken,
-                    onResult = { userData: UserData ->
-
-                    },
-                    onError = onError
-                )
-            },
-            onError = onError
-        )
-
-        //send user idToken to backend -> get user info
-
+        return if (idToken == null){
+                null
+            } else {
+                //send user idToken to backend -> get user data
+                dbRemoteDataSource.requestUserDataWithIdToken(userGoogleIdToken = idToken)
+            }
     }
+
+
+
+
+
+
 
 
 //    suspend fun signInLaunchGoogleLauncher(

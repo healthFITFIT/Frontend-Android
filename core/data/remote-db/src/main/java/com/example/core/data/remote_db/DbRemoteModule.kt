@@ -1,5 +1,7 @@
 package com.example.core.data.remote_db
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -23,7 +25,11 @@ abstract class DbRemoteModule {
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
-    private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com"
+    private const val BASE_URL = "https://health-fitfit.kro.kr/"
+    private val moshi: Moshi = Moshi
+        .Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
     @Provides
     @Singleton
@@ -31,7 +37,7 @@ object RetrofitModule {
 
     ): Retrofit {
         return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(BASE_URL)
             .build()
     }

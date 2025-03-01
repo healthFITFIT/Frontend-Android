@@ -93,28 +93,6 @@ fun SignInRoute(
 
 
 
-    //Google sign in launcher
-//    val googleLauncher = rememberLauncherForActivityResult(
-//        contract = ActivityResultContracts.StartIntentSenderForResult(),
-//        onResult = { result ->
-//            coroutineScope.launch {
-//                signInViewModel.signInWithGoogleResult(
-//                    result = result,
-//                    onDone = { userData ->
-//                        //update userData
-//                        updateUserData(userData)
-//                        navigateToMain()
-//                    },
-//                    showErrorSnackbar = { signInErrorSnackbar() }
-//                )
-//            }
-//        }
-//    )
-
-
-
-
-
 
     val uriHandler = LocalUriHandler.current
 
@@ -129,17 +107,12 @@ fun SignInRoute(
         onSignInClick = {providerId ->
             when (providerId){
                 ProviderId.GOOGLE -> {
-//                    coroutineScope.launch {
-//                        //launch google one tap sign in launcher
-//                        signInViewModel.signInLaunchGoogleLauncher(
-//                            launcher = googleLauncher,
-//                            showErrorSnackbar = { signInErrorSnackbar() }
-//                        )
-//                    }
-
                     coroutineScope.launch {
                         signInViewModel.signInWithGoogle(
                             context = context,
+                            onResult = { userData ->
+                                updateUserData(userData)
+                            },
                             onError = { signInErrorSnackbar() }
                         )
                     }
