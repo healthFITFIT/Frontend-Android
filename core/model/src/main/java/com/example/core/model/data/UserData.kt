@@ -6,7 +6,7 @@ data class UserData(
     val userId: String,
     val name: String?,
     val email: String?,
-    val profileImagePath: String?,
+    val profileImageUrl: String?,
 
     val providerIds: List<ProviderId>,
 )

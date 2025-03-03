@@ -112,6 +112,7 @@ fun SignInRoute(
                             context = context,
                             onResult = { userData ->
                                 updateUserData(userData)
+                                navigateToMain()
                             },
                             onError = { signInErrorSnackbar() }
                         )

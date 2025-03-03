@@ -1,7 +1,8 @@
 package com.example.core.data.remote_db
 
 import com.example.core.model.data.UserData
-import com.example.core.model.dto.ApiResponse
+import com.example.core.model.dto.ApiResponseDto
+import com.example.core.model.dto.IdTokenRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,8 +13,8 @@ interface RetrofitApiService {
 
     @POST("oauth/validate")
     suspend fun requestUserDataWithIdToken(
-        @Body idToken: String
-    ): Response<ApiResponse>
+        @Body idTokenRequest: IdTokenRequest
+    ): Response<ApiResponseDto>
 
 
 
@@ -21,7 +22,7 @@ interface RetrofitApiService {
     @POST("")
     fun requestUserDataWithJwt(
         @Header("Authorization") jwt: String,
-    ): Response<ApiResponse>
+    ): Response<ApiResponseDto>
 
 
 
