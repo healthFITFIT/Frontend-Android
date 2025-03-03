@@ -1,5 +1,7 @@
 package com.example.core.model.dto
 
+import com.example.core.model.data.UserData
+import com.example.core.model.enums.ProviderId
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
@@ -17,7 +19,17 @@ data class UserDataDto(
     @Json(name = "name")                val name: String,
     @Json(name = "email")               val email: String,
     @Json(name = "profile_image_url")   val profileImagePath: String,
-)
+){
+    fun toUserData(): UserData {
+        return UserData(
+            userId = "1",
+            name = name,
+            email = email,
+            profileImageUrl = profileImagePath,
+            providerIds = listOf(ProviderId.GOOGLE)
+        )
+    }
+}
 
 @JsonClass(generateAdapter = true)
 data class ErrorDto(
