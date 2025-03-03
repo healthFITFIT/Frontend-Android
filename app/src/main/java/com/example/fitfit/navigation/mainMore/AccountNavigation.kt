@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -36,6 +37,8 @@ fun NavGraphBuilder.accountScreen(
 
     navigateUp: () -> Unit,
     navigateToSomeScreen: () -> Unit,
+
+    modifier: Modifier = Modifier,
 ) {
     composable(
         route = screenDestination.route,
@@ -66,7 +69,15 @@ fun NavGraphBuilder.accountScreen(
             }
 
             AccountRoute(
-                navigateUp = navigateUp
+                use2Panes = externalState.windowSizeClass.use2Panes,
+                userData = appUiState.appUserData!!,
+                internetEnabled = externalState.internetEnabled,
+                spacerValue = externalState.windowSizeClass.spacerValue,
+                navigateToEditAccount = {/**TODO*/},
+                navigateToDeleteAccount = {/**TODO*/},
+                navigateUp = navigateUp,
+                onSignOutDone = {/**TODO*/},
+                modifier = modifier
             )
         }
     }

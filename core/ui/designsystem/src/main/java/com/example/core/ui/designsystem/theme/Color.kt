@@ -141,6 +141,9 @@ object CustomColor {
     val white = Color(0xffffffff)
 
     val outlineError = Color(0xffE71717)
+
+    val imageBackground = Color(0xFF0d0d0d)
+    val imageForeground = Color(0xFF0d0d0d).copy(alpha = 0.7f)
 }
 
 //examples

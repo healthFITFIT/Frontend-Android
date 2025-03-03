@@ -34,9 +34,14 @@
     <string name="next_exercise">Next exercise</string>
 
 
-    <!--component/topAppBars/ ===================================================================-->
+    <!--component/topAppBar/ ====================================================================-->
     <!-- FitfitTopAppBar.kt -->
     <string name="internet_unavailable">Internet unavailable</string>
+
+
+    <!--component/ ==============================================================================-->
+    <!-- Image.kt -->
+    <string name="image_loading_error">Image loading error</string>
 
 
     <!--component/icon/FitfitIcons.kt/ =======================================================-->

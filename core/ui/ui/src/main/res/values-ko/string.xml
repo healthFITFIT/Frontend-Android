@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--card/ ===================================================================================-->
-    <!-- AppIconWithAppNameCard.kt -->
+    <!-- UserProfileCard.kt -->
+    <string name="user_info">사용자 정보</string>
+    <string name="no_name">이름 없음</string>
+    <string name="no_email">이메일 없음</string>
+    <string name="connected_with">연결된 계정</string>
+    <string name="my_profile_image">프로필 사진</string>
+    <string name="default_profile_image">기본 프로필 사진</string>
 
 
 
