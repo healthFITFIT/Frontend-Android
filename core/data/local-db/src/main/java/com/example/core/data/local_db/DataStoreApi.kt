@@ -178,7 +178,7 @@ class DataStoreApi @Inject constructor(
 
             if (jwtOriginal == null){
                 preferences[JWT_SECURED] = ""
-                Log.d(DATA_STORE_TAG, "jwt original: null")
+//                Log.d(DATA_STORE_TAG, "jwt original: null")
             }
             else {
                 //encrypt jwt string
@@ -186,7 +186,7 @@ class DataStoreApi @Inject constructor(
                 val jwtSecured = JwtSecure.encodeIvAndData(iv, secureByteArray)
                 preferences[JWT_SECURED] = jwtSecured
 
-                Log.d(DATA_STORE_TAG, "jwt original: $jwtOriginal / jwt secured: $jwtSecured")
+//                Log.d(DATA_STORE_TAG, "jwt original: $jwtOriginal / jwt secured: $jwtSecured")
             }
         }
     }

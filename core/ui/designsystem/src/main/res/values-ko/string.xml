@@ -34,9 +34,14 @@
     <string name="next_exercise">다음 운동</string>
 
 
-    <!--component/topAppBars/ ===================================================================-->
+    <!--component/topAppBar/ ====================================================================-->
     <!-- FitfitTopAppBar.kt -->
     <string name="internet_unavailable">인터넷 연결 없음</string>
+
+
+    <!--component/ ==============================================================================-->
+    <!-- Image.kt -->
+    <string name="image_loading_error">이미지 로딩 에러</string>
 
 
     <!--component/icon/FitfitIcons.kt/ =======================================================-->

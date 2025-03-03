@@ -66,39 +66,15 @@ val Context.currentConnectivityState: ConnectivityObserver.Status
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        return getCurrentConnectivityState(connectivityManager)
-    }
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
 
-private fun getCurrentConnectivityState(
-    connectivityManager: ConnectivityManager
-): ConnectivityObserver.Status {
-    var status: ConnectivityObserver.Status = ConnectivityObserver.Status.LOST
+        return when {
+            capabilities == null -> ConnectivityObserver.Status.LOST
 
-    val networkRequest = NetworkRequest.Builder()
-        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        .build()
+            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ->
+                ConnectivityObserver.Status.AVAILABLE
 
-    val callback = object : ConnectivityManager.NetworkCallback() {
-        override fun onAvailable(network: Network) {
-            status = ConnectivityObserver.Status.AVAILABLE
-        }
-
-        override fun onLost(network: Network) {
-            status = ConnectivityObserver.Status.LOST
+            else -> ConnectivityObserver.Status.UNAVAILABLE
         }
     }
-
-    connectivityManager.registerNetworkCallback(networkRequest, callback)
-
-    return status
-
-
-//    val connected = connectivityManager.allNetworks.any { network ->
-//        connectivityManager.getNetworkCapabilities(network)
-//            ?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-//            ?: false
-//    }
-//
-//    return if (connected) ConnectivityObserver.Status.AVAILABLE
-//    else ConnectivityObserver.Status.LOST
-}

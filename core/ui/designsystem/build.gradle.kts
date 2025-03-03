@@ -57,7 +57,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.android.material)
 
-    //
+    //coil
+    implementation(libs.coil.compose)
 
     //test
     testImplementation(libs.junit)
