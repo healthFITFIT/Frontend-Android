@@ -143,7 +143,6 @@ class AppViewModel @Inject constructor(
         viewModelScope.launch {
 //            val time = measureNanoTime {
 //            val userData = userRepository.getSignedInUser()
-            var userData: UserData? = UserData("test", "", "", "", emptyList()) //TODO: delete this and use upper code
 //            userData = null
 
 
@@ -176,6 +175,7 @@ class AppViewModel @Inject constructor(
                 }
             }
 
+            newUserData = UserData("test", "", "", "", emptyList()) //TODO: delete this and use upper code
 
             _appUiState.update {
                 it.copy(appUserData = newUserData)

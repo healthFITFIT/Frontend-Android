@@ -1,6 +1,6 @@
 package com.example.core.data.ai_pose_detection
 
-import com.example.core.model.data.Offset3D
+import com.example.core.model.data.MyPointF3D
 import com.google.mlkit.vision.pose.PoseLandmark
 import javax.inject.Inject
 import kotlin.math.atan2
@@ -14,7 +14,7 @@ class AiPoseDetectionApi @Inject constructor(
     private var isGoingDown = false  //push up
 
     override fun pushUpAutoCount(
-        poseLandmarks: Map<Int, Offset3D>,
+        poseLandmarks: Map<Int, MyPointF3D>,
         onPlusReps: () -> Unit
     ){
         val leftShoulder = poseLandmarks[PoseLandmark.LEFT_SHOULDER]
@@ -45,9 +45,9 @@ class AiPoseDetectionApi @Inject constructor(
     }
 
     private fun calculateAngle(
-        a: Offset3D,
-        b: Offset3D,
-        c: Offset3D
+        a: MyPointF3D,
+        b: MyPointF3D,
+        c: MyPointF3D
     ): Double {
         val radians = atan2(
             c.y - b.y, c.x - b.x

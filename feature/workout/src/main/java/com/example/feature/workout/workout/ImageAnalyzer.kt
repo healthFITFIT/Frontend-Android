@@ -6,7 +6,7 @@ import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.compose.ui.graphics.Color
-import com.example.core.model.data.Offset3D
+import com.example.core.model.data.MyPointF3D
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseDetection
@@ -66,7 +66,7 @@ class ImageAnalyzer(
 
     private fun extractPoseLandmarks(
         pose: Pose
-    ): Map<Int, Offset3D> {
+    ): Map<Int, MyPointF3D> {
         return pose.allPoseLandmarks.associateBy { it.landmarkType }
             .filterValues { it != null }       //remove null
             .mapValues { it.value.toOffset() } //convert to Offset3D
@@ -75,7 +75,7 @@ class ImageAnalyzer(
 
     private fun extractPoseLines(
         pose: Pose
-    ): List<Triple<Offset3D, Offset3D, Color>> {
+    ): List<Triple<MyPointF3D, MyPointF3D, Color>> {
         val landmarks = pose.allPoseLandmarks.associateBy { it.landmarkType }
 
         return listOf(
@@ -113,8 +113,8 @@ class ImageAnalyzer(
             .map { Triple(it.first!!, it.second!!, it.third) }
     }
 
-    private fun PoseLandmark.toOffset(): Offset3D {
+    private fun PoseLandmark.toOffset(): MyPointF3D {
         val point = this.position3D
-        return Offset3D(point.x, point.y, point.z)
+        return MyPointF3D(point.x, point.y, point.z)
     }
 }
